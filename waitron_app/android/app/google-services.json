@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561685697336",
+    "project_id": "waitronapp",
+    "storage_bucket": "waitronapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561685697336:android:6b28274e1c088a1fdd67cd",
+        "android_client_info": {
+          "package_name": "com.example.waitron_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ91tlVFt487Lg5eZhTAzsDyn1MMz2FIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
