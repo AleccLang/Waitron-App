@@ -1,5 +1,6 @@
 // main.dart
 import 'package:flutter/material.dart';
+import 'package:waitron_app/screens/MenuPage.dart';
 import 'screens/OrderPage.dart';
 import 'screens/WaitronPage.dart';
 import 'screens/KitchenPage.dart';
@@ -66,6 +67,15 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: const Text('Go to Kitchen Page'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MenuPage()),
+                );
+              },
+              child: const Text('Go to Menu Page'),
             ),
           ],
         ),

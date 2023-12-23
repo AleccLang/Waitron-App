@@ -19,7 +19,7 @@ class Orders {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'requests': requests.map((request) => {
         'item': request.item,
@@ -47,7 +47,7 @@ class Item {
 
   Item({required this.code,required this.description,required this.price});
 
-   Map<String,dynamic> toMap(){
+   Map<String,dynamic> toJson(){
     return {
       'code' : code,
       'description': description,
