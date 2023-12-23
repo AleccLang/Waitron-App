@@ -1,29 +1,41 @@
 // main.dart
 import 'package:flutter/material.dart';
-import 'OrderPage.dart';
-import 'WaitronPage.dart';
-import 'KitchenPage.dart';
+import 'screens/OrderPage.dart';
+import 'screens/WaitronPage.dart';
+import 'screens/KitchenPage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.android,
+  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
-      appBar: AppBar(title: Text('Flutter Home Page')),
+      backgroundColor: const Color.fromRGBO(104, 23, 186, 1),
+      appBar: AppBar(title: const Text('Flutter Home Page')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,28 +44,28 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrderPage()),
+                  MaterialPageRoute(builder: (context) => const Orderpage()),
                 );
               },
-              child: Text('Go to Order Page'),
+              child: const Text('Go to Order Page'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => WaitronPage()),
+                  MaterialPageRoute(builder: (context) => const WaitronPage()),
                 );
               },
-              child: Text('Go to Waitron Page'),
+              child: const Text('Go to Waitron Page'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => KitchenPage()),
+                  MaterialPageRoute(builder: (context) => const KitchenPage()),
                 );
               },
-              child: Text('Go to Kitchen Page'),
+              child: const Text('Go to Kitchen Page'),
             ),
           ],
         ),
