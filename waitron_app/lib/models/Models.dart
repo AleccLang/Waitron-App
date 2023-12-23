@@ -1,12 +1,13 @@
 class Orders {
-  List<Request> requests;
   String table;
+  List<Request> requests;
   String status;
 
-  Orders({required this.requests,required this.table,required this.status});
+  Orders({required this.table,required this.requests,required this.status});
 
   factory Orders.fromJson(Map<String, dynamic> json) {
     return Orders(
+      table: json['table'],
       requests: (json['requests'] as List<dynamic>).map((requestData) {
         return Request(
           item: requestData['item'],
@@ -14,19 +15,18 @@ class Orders {
           quantity: requestData['quantity'],
         );
       }).toList(),
-      table: json['table'],
       status: json['status'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'table': table,
       'requests': requests.map((request) => {
         'item': request.item,
         'notes': request.notes,
         'quantity': request.quantity,
       }).toList(),
-      'table': table,
       'status': status,
     };
   }

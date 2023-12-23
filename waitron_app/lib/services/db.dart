@@ -10,14 +10,27 @@ class DBs {
 
   // Orders snapshot and CRUD methods
 
-  
+  // Create order.
+  Future addOrder(Orders order) async {
+    await orderCollection.doc(order.table).set(order.toJson());
+  }
 
+  // Update order status
+  void updateOrderStatus(String table, String status) async{
+    orderCollection.doc(table).update({'status' : status});
+  }
+
+  // Read orders
+  Stream<QuerySnapshot> getOrderStream() {
+    return orderCollection.snapshots();
+  }
+  
+  // Delete order
+  void deleteOrder(Orders order) {
+    orderCollection.doc(order.table).delete();
+  }
 
   // Items CRUD methods:
-
-  // Stream<List<Item>> getStream() {
-  //   return orderCollection.snapshots().map((snapshot) => snapshot.docs.map((document) => Item.fromJson(document.data())).toList());
-  // }
 
   // Create item.
   Future addItem(Item item) async {
