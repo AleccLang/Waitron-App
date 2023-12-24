@@ -123,7 +123,7 @@ class _MenuPageState extends State<MenuPage> {
                 stream: DBs().getItemStream(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
-                    // Map the documents to a list of Item objects
+                    // Maps the docs to a list of Item objects
                     List<Item> items = snapshot.data!.docs
                         .map((doc) => Item.fromJson(doc.data() as Map<String, dynamic>))
                         .toList();
@@ -133,7 +133,7 @@ class _MenuPageState extends State<MenuPage> {
                       itemBuilder: (context, index) {
                         // Display each item in the list
                         return ListTile(
-                          title: Text('${items[index].description} - R ${items[index].price}'),
+                          title: Text('${items[index].description} - R${items[index].price}'),
                           subtitle: Text('Item code - ${items[index].code}'),
                         );
                       },

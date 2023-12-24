@@ -5,12 +5,13 @@ class Orders {
 
   Orders({required this.table,required this.requests,required this.status});
 
+  
   factory Orders.fromJson(Map<String, dynamic> json) {
     return Orders(
       table: json['table'],
       requests: (json['requests'] as List<dynamic>).map((requestData) {
         return Request(
-          item: requestData['item'],
+          item: requestData['itemCode'],
           notes: requestData['notes'],
           quantity: requestData['quantity'],
         );
@@ -23,7 +24,7 @@ class Orders {
     return {
       'table': table,
       'requests': requests.map((request) => {
-        'item': request.item,
+        'itemCode': request.item,
         'notes': request.notes,
         'quantity': request.quantity,
       }).toList(),
@@ -33,12 +34,33 @@ class Orders {
 }
 
 class Request {
-  Item item;
+  String item;
   String notes;
   int quantity;
 
-  Request({required this.item,required this.notes,required this.quantity});
+  Request({
+    required this.item,
+    required this.notes,
+    required this.quantity,
+  });
+
+  factory Request.fromJson(Map<String, dynamic> json) {
+    return Request(
+      item: json['item'],
+      notes: json['notes'],
+      quantity: json['quantity'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'item': item,
+      'notes': notes,
+      'quantity': quantity,
+    };
+  }
 }
+
 
 class Item {
   String code;
@@ -63,4 +85,14 @@ class Item {
     );
   }
 
+  @override
+  bool operator ==(Object other) {
+    return (other is Item &&
+      other.code == code &&
+      other.description == description &&
+      other.price == price);
+  }
+
+  @override
+  int get hashCode => code.hashCode;
 }
