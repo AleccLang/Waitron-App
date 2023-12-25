@@ -111,6 +111,34 @@ class OrderList extends StatelessWidget {
                     ),
                   ],
                 ),
+              if (order.status == 'Placed')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Start work on the order
+                        DBs().updateOrderStatus(order.table, 'In Progress');
+                        Navigator.pop(context);
+                      },
+                      child: Text('Begin Order'),
+                    ),
+                  ],
+                ),
+              if (order.status == 'In Progress')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Finish the order
+                        DBs().updateOrderStatus(order.table, 'Completed');
+                        Navigator.pop(context);
+                      },
+                      child: Text('Finish Order'),
+                    ),
+                  ],
+                ),
               if (order.status == 'Completed')
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

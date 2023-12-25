@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:waitron_app/screens/WaitronPage.dart';
+
 
 class KitchenPage extends StatelessWidget {
   const KitchenPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Placed'),
+              Tab(text: 'In Progress'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            OrderList(status: 'Placed'),
+            OrderList(status: 'In Progress'),
+          ],
+        ),
       ),
     );
   }
