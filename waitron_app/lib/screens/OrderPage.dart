@@ -21,6 +21,21 @@ class _OrderPageState extends State<OrderPage> {
   Item? selectedMenuItem;
 
   @override
+  void initState() {
+    super.initState();
+    DBs().getItemStream().first.then((QuerySnapshot snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        List<Item> items = snapshot.docs
+            .map((doc) => Item.fromJson(doc.data() as Map<String, dynamic>))
+            .toList();
+        setState(() {
+          selectedMenuItem = items.first; // Init with thefirst item in the list
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -95,6 +110,9 @@ class _OrderPageState extends State<OrderPage> {
                         quantityEntry.clear();
                         selectedMenuItem = null;
                       });
+                      setState(() {
+                        visible = !visible;
+                      });
                     },
                     child: Text('Add Item to Order'),
                   ),
@@ -137,7 +155,6 @@ class _OrderPageState extends State<OrderPage> {
                 tableNumEntry.clear();
                 setState(() {
                   orderRequests = [];
-                  visible = !visible;
                 });
               },
               child: Text('Request Order'),
