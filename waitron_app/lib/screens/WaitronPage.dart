@@ -132,6 +132,7 @@ class OrderList extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // Finish the order
+                        // ***** Notify waitron *****
                         DBs().updateOrderStatus(order.table, 'Completed');
                         Navigator.pop(context);
                       },

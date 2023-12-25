@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Orders {
   String table;
   List<Request> requests;
   String status;
+  FieldValue time;
 
-  Orders({required this.table,required this.requests,required this.status});
+  Orders({required this.table,required this.requests,required this.status, required this.time});
 
   
   factory Orders.fromJson(Map<String, dynamic> json) {
@@ -17,6 +20,7 @@ class Orders {
         );
       }).toList(),
       status: json['status'],
+      time: json['time'],
     );
   }
 
@@ -29,6 +33,8 @@ class Orders {
         'quantity': request.quantity,
       }).toList(),
       'status': status,
+      'time' : time,
+      
     };
   }
 }

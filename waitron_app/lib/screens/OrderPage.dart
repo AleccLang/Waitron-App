@@ -150,6 +150,7 @@ class _OrderPageState extends State<OrderPage> {
                     table: tableNumEntry.text,
                     requests: orderRequests,
                     status: 'Requested',
+                    time: FieldValue.serverTimestamp(),
                   ),
                 );
                 tableNumEntry.clear();
