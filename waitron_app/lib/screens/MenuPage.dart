@@ -20,9 +20,6 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Menu'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

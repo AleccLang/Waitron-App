@@ -1,6 +1,7 @@
 // main.dart
 import 'package:flutter/material.dart';
 import 'package:waitron_app/screens/MenuPage.dart';
+import 'package:waitron_app/screens/Staff.dart';
 import 'screens/OrderPage.dart';
 import 'screens/WaitronPage.dart';
 import 'screens/KitchenPage.dart';
@@ -50,32 +51,41 @@ class HomePage extends StatelessWidget {
               },
               child: const Text('Go to Order Page'),
             ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const WaitronPage()),
+            //     );
+            //   },
+            //   child: const Text('Go to Waitron Page'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const KitchenPage()),
+            //     );
+            //   },
+            //   child: const Text('Go to Kitchen Page'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const MenuPage()),
+            //     );
+            //   },
+            //   child: const Text('Go to Menu Page'),
+            // ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const WaitronPage()),
+                  MaterialPageRoute(builder: (context) => const Staff()),
                 );
               },
-              child: const Text('Go to Waitron Page'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const KitchenPage()),
-                );
-              },
-              child: const Text('Go to Kitchen Page'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MenuPage()),
-                );
-              },
-              child: const Text('Go to Menu Page'),
+              child: const Text('Go to Staff Page'),
             ),
           ],
         ),
