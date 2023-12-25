@@ -4,23 +4,46 @@ import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 
 class WaitronPage extends StatelessWidget {
-  const WaitronPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: OrderList(),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'Requests'),
+              Tab(text: 'Completed'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            OrderList(status: 'Requested'),
+            OrderList(status: 'Completed'),
+          ],
+        ),
+      ),
     );
   }
 }
 
 class OrderList extends StatelessWidget {
+  final String status;
+  const OrderList({Key? key, required this.status}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: DBs().getOrderStream(),
       builder: (context, snapshot) {
-        List<Orders> orders = snapshot.data!.docs.map((DocumentSnapshot doc) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        List<Orders> orders = snapshot.data!.docs
+        .where((doc) => doc['status'] == status)
+        .map((DocumentSnapshot doc) {
           return Orders.fromJson(doc.data() as Map<String, dynamic>);
         }).toList();
 
@@ -29,7 +52,7 @@ class OrderList extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                _showOrderOptions(context, orders[index]);
+                  orderOptions(context, orders[index]);
               },
               child: ListTile(
                 title: Text('Table: ${orders[index].table}'),
@@ -42,7 +65,7 @@ class OrderList extends StatelessWidget {
     );
   }
 
-  void _showOrderOptions(BuildContext context, Orders order) {
+  void orderOptions(BuildContext context, Orders order) {
     showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -64,27 +87,44 @@ class OrderList extends StatelessWidget {
                 }).toList(),
               ),
               SizedBox(height: 16.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Approve order 
-                      DBs().updateOrderStatus(order.table, 'Placed');
-                      Navigator.pop(context);
-                    },
-                    child: Text('Approve Order'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Reject order
-                      DBs().deleteOrder(order);
-                      Navigator.pop(context);
-                    },
-                    child: Text('Reject Order'),
-                  ),
-                ],
-              ),
+              if (order.status == 'Requested')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Approve order
+                        // ***** Notify customer *****
+                        DBs().updateOrderStatus(order.table, 'Placed');
+                        Navigator.pop(context);
+                      },
+                      child: Text('Approve Order'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Reject order
+                        // ***** Notify customer *****
+                        DBs().deleteOrder(order);
+                        Navigator.pop(context);
+                      },
+                      child: Text('Reject Order'),
+                    ),
+                  ],
+                ),
+              if (order.status == 'Completed')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Deliver the order
+                        DBs().updateOrderStatus(order.table, 'Delivered');
+                        Navigator.pop(context);
+                      },
+                      child: Text('Deliver Order'),
+                    ),
+                  ],
+                ),
             ],
           ),
         );

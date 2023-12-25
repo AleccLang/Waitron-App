@@ -58,9 +58,9 @@ class _OrderPageState extends State<OrderPage> {
               Column(
                 children: [
                   // List of all items on the menu
-                  StreamBuilder(
+                  StreamBuilder<QuerySnapshot>(
                     stream: DBs().getItemStream(),
-                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         List<Item> items = snapshot.data!.docs
                             .map((doc) =>

@@ -23,8 +23,6 @@ class StaffPageState extends State<Staff> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-    ),
     body: PageView(
       controller: pageController,
       onPageChanged: (newIndex){
