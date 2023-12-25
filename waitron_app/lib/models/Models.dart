@@ -4,7 +4,7 @@ class Orders {
   String table;
   List<Request> requests;
   String status;
-  FieldValue time;
+  Timestamp time;
 
   Orders({required this.table,required this.requests,required this.status, required this.time});
 

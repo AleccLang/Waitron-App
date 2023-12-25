@@ -22,7 +22,7 @@ class DBs {
 
   // Read orders
   Stream<QuerySnapshot> getOrderStream() {
-    return orderCollection.snapshots();
+    return orderCollection.orderBy('time', descending: false).snapshots();
   }
   
   // Delete order
@@ -51,7 +51,5 @@ class DBs {
   void deleteItem(Item item) {
     itemCollection.doc(item.code).delete();
   }
-
-  
 
 }
