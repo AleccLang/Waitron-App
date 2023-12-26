@@ -12,7 +12,7 @@ class DBs {
 
   // Create order.
   Future addOrder(Orders order) async {
-    await orderCollection.doc(order.table).set(order.toJson());
+    await orderCollection.doc(orderCollection.doc().id).set(order.toJson());
   }
 
   // Update order status

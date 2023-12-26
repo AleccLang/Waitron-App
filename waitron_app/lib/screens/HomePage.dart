@@ -60,13 +60,12 @@ class HomePageState extends State<HomePage> {
                           ),
                         );
                       } else {
-                        tableNumEntry.clear();
-                        FocusScope.of(context).unfocus();
                         // Order page
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const OrderPage()),
+                          MaterialPageRoute(builder: (context) => OrderPage(tableNumber: tableNumEntry.text)),
                         );
+                        FocusScope.of(context).unfocus();
                       }
                     },
                     child: const Text('Place Order'),

@@ -78,7 +78,17 @@ class OrderPageState extends State<OrderPage> {
                 ElevatedButton(
                   onPressed: () {
                     // Request the order
-                    requestOrder(context);
+                    DBs().addOrder(
+                      Orders(
+                        table: tableNumber,
+                        requests: orderRequests,
+                        status: 'Requested',
+                        time: Timestamp.now(),
+                      ),
+                    );
+                    setState(() {
+                      orderRequests = [];
+                    });
                   },
                   child: const Text('Request Order'),
                 ),
@@ -155,47 +165,6 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               child: const Text('Add Item to Order'),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-  }
-  
-  // Sends the order as a request to the waitron
-  void requestOrder(BuildContext context){
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Request Order'),
-          content: Column( mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: tableNumEntry,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Table no.'),
-            ),
-            const SizedBox(height: 15.0),
-            ElevatedButton(
-              onPressed: () {
-                // Request the order
-                DBs().addOrder(
-                  Orders(
-                    table: tableNumEntry.text,
-                    requests: orderRequests,
-                    status: 'Requested',
-                    time: Timestamp.now(),
-                  ),
-                );
-                tableNumEntry.clear();
-                setState(() {
-                  Navigator.pop(context);
-                  orderRequests = [];
-                });
-              },
-              child: const Text('Request Order'),
             ),
           ],
         ),
