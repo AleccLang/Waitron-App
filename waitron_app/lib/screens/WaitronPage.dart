@@ -6,7 +6,6 @@ import 'package:waitron_app/services/db.dart';
 class WaitronPage extends StatelessWidget {
   const WaitronPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,6 +30,7 @@ class WaitronPage extends StatelessWidget {
   }
 }
 
+// Builds and outputs list of Orders depending on their status
 class OrderList extends StatelessWidget {
   final String status;
   const OrderList({super.key, required this.status});
@@ -67,96 +67,99 @@ class OrderList extends StatelessWidget {
     );
   }
 
+  // Shows an orders details and controls the actions taken on an order in the list.
   void orderOptions(BuildContext context, Orders order) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
       builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+        return AlertDialog(
+          title: const Text('Update Order'),
+          content: Column( mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Table: ${order.table}', style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8.0),
-              Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0)),
-              const SizedBox(height: 16.0),
-              const Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: order.requests.map((request) {
-                  return Text('${request.quantity} x ${request.item} (${request.notes})');
-                }).toList(),
+          children: [
+            Text('Table: ${order.table}', style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8.0),
+            Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0)),
+            const SizedBox(height: 15.0),
+            const Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: order.requests.map((request) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text('${request.quantity} x ${request.item} (${request.notes})')
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 15.0),
+            if (order.status == 'Requested')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Approve order
+                      // ***** Notify customer *****
+                      DBs().updateOrderStatus(order.table, 'Placed');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Approve'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Reject order
+                      // ***** Notify customer *****
+                      DBs().deleteOrder(order);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Reject'),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16.0),
-              if (order.status == 'Requested')
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Approve order
-                        // ***** Notify customer *****
-                        DBs().updateOrderStatus(order.table, 'Placed');
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Approve Order'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Reject order
-                        // ***** Notify customer *****
-                        DBs().deleteOrder(order);
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Reject Order'),
-                    ),
-                  ],
-                ),
-              if (order.status == 'Placed')
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Start work on the order
-                        DBs().updateOrderStatus(order.table, 'In Progress');
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Begin Order'),
-                    ),
-                  ],
-                ),
-              if (order.status == 'In Progress')
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Finish the order
-                        // ***** Notify waitron *****
-                        DBs().updateOrderStatus(order.table, 'Completed');
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Finish Order'),
-                    ),
-                  ],
-                ),
-              if (order.status == 'Completed')
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Deliver the order
-                        DBs().updateOrderStatus(order.table, 'Delivered');
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Deliver Order'),
-                    ),
-                  ],
-                ),
-            ],
+            if (order.status == 'Placed')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Start work on the order
+                      DBs().updateOrderStatus(order.table, 'In Progress');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Begin Order'),
+                  ),
+                ],
+              ),
+            if (order.status == 'In Progress')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Finish the order
+                      // ***** Notify waitron *****
+                      DBs().updateOrderStatus(order.table, 'Completed');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Finish Order'),
+                  ),
+                ],
+              ),
+            if (order.status == 'Completed')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Deliver the order
+                      DBs().updateOrderStatus(order.table, 'Delivered');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Deliver Order'),
+                  ),
+                ],
+              ),
+          ],
           ),
         );
       },

@@ -20,7 +20,7 @@ class MenuPageState extends State<MenuPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding:  const EdgeInsets.all(16.0),
+        padding:  const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -97,6 +97,7 @@ class MenuPageState extends State<MenuPage> {
             ),
             const SizedBox(height: 16.0),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () {

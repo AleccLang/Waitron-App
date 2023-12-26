@@ -4,20 +4,25 @@ import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 
 class OrderPage extends StatefulWidget {
-  const OrderPage({super.key});
+  final tableNumber;
+
+  const OrderPage({super.key, required this.tableNumber});
 
   @override
-  OrderPageState createState() => OrderPageState();
+  OrderPageState createState() => OrderPageState(tableNumber);
 }
 
 class OrderPageState extends State<OrderPage> {
-  final TextEditingController tableNumEntry = TextEditingController();
+  final String tableNumber;
   final TextEditingController notesEntry = TextEditingController();
   final TextEditingController quantityEntry = TextEditingController();
 
   List<Request> orderRequests = [];
   Item? selectedMenuItem;
+  
+  OrderPageState(this.tableNumber);
 
+  // Inits the item list and sets the selected item to default to the first
   @override
   void initState() {
     super.initState();
@@ -27,7 +32,7 @@ class OrderPageState extends State<OrderPage> {
             .map((doc) => Item.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
         setState(() {
-          selectedMenuItem = items.first; // Init with thefirst item in the list
+          selectedMenuItem = items.first; 
         });
       }
     });
@@ -39,7 +44,7 @@ class OrderPageState extends State<OrderPage> {
       appBar: AppBar(
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -61,6 +66,7 @@ class OrderPageState extends State<OrderPage> {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () {
@@ -132,6 +138,7 @@ class OrderPageState extends State<OrderPage> {
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Quantity'),
             ),
+            const SizedBox(height: 15.0),
             ElevatedButton(
               onPressed: () {
                 // Adds the request to the list
@@ -156,7 +163,7 @@ class OrderPageState extends State<OrderPage> {
   );
   }
   
-  // Adds an item to the order request
+  // Sends the order as a request to the waitron
   void requestOrder(BuildContext context){
     showDialog(
       context: context,
@@ -170,6 +177,7 @@ class OrderPageState extends State<OrderPage> {
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Table no.'),
             ),
+            const SizedBox(height: 15.0),
             ElevatedButton(
               onPressed: () {
                 // Request the order
