@@ -7,10 +7,10 @@ class OrderPage extends StatefulWidget {
   const OrderPage({Key? key}) : super(key: key);
 
   @override
-  _OrderPageState createState() => _OrderPageState();
+  OrderPageState createState() => OrderPageState();
 }
 
-class _OrderPageState extends State<OrderPage> {
+class OrderPageState extends State<OrderPage> {
   final TextEditingController tableNumEntry = TextEditingController();
   final TextEditingController notesEntry = TextEditingController();
   final TextEditingController quantityEntry = TextEditingController();
