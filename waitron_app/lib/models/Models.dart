@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Orders {
+  String id;
   String table;
   List<Request> requests;
   String status;
   Timestamp time;
 
-  Orders({required this.table,required this.requests,required this.status, required this.time});
+  Orders({required this.id, required this.table,required this.requests,required this.status, required this.time});
 
   
   factory Orders.fromJson(Map<String, dynamic> json) {
     return Orders(
+      id: json['id'],
       table: json['table'],
       requests: (json['requests'] as List<dynamic>).map((requestData) {
         return Request(
@@ -26,6 +28,7 @@ class Orders {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'table': table,
       'requests': requests.map((request) => {
         'itemCode': request.item,

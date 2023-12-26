@@ -37,13 +37,33 @@ class OrderPageState extends State<OrderPage> {
       }
     });
   }
-
-  @override
+    @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Order Page'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'Place Order'),
+              Tab(text: 'Table Orders'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            createOrderTab(context),
+            listOrdersTab(context),
+          ],
+        ),
       ),
-      body: Padding(
+    );
+  }
+
+  // Tab to create an order for the table
+  Widget createOrderTab(BuildContext context) {
+    return Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,6 +100,7 @@ class OrderPageState extends State<OrderPage> {
                     // Request the order
                     DBs().addOrder(
                       Orders(
+                        id: "",
                         table: tableNumber,
                         requests: orderRequests,
                         status: 'Requested',
@@ -96,6 +117,51 @@ class OrderPageState extends State<OrderPage> {
             ),
           ],
         ),
+      );
+    }
+
+  // Tab to list all orders for the table
+  Widget listOrdersTab(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            'Order Requests:',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child:StreamBuilder<QuerySnapshot>(
+              stream: DBs().getOrderStream(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                List<Orders> orders = snapshot.data!.docs
+                .where((doc) => doc['table'] == tableNumber)
+                .map((DocumentSnapshot doc) {
+                  return Orders.fromJson(doc.data() as Map<String, dynamic>);
+                }).toList();
+
+                return ListView.builder(
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                          collectOrder(context, orders[index]);
+                      },
+                      child: ListTile(
+                        title: Text('Table: ${orders[index].table}'),
+                        subtitle: Text('Status: ${orders[index].status}'),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -173,4 +239,48 @@ class OrderPageState extends State<OrderPage> {
   );
   }
 
+  // Allows user to collect their own order
+  void collectOrder(BuildContext context, Orders order) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column( mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Table: ${order.table}', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8.0),
+            Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0)),
+            const SizedBox(height: 15.0),
+            const Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: order.requests.map((request) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Text('${request.quantity} x ${request.item} (${request.notes})')
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 15.0),
+            if (order.status == 'Completed')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Collect the order
+                      DBs().updateOrderStatus(order.id, 'Collected');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Collect Order'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

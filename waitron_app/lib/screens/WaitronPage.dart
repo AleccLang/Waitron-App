@@ -73,11 +73,10 @@ class OrderList extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Update Order'),
           content: Column( mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Table: ${order.table}', style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+            Text('Table: ${order.table}', style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8.0),
             Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0)),
             const SizedBox(height: 15.0),
@@ -100,7 +99,7 @@ class OrderList extends StatelessWidget {
                     onPressed: () {
                       // Approve order
                       // ***** Notify customer *****
-                      DBs().updateOrderStatus(order.table, 'Placed');
+                      DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
                     },
                     child: const Text('Approve'),
