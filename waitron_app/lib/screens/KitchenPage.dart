@@ -11,14 +11,14 @@ class KitchenPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
               Tab(text: 'Placed'),
               Tab(text: 'In Progress'),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             OrderList(status: 'Placed'),
             OrderList(status: 'In Progress'),

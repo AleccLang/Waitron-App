@@ -4,6 +4,8 @@ import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 
 class WaitronPage extends StatelessWidget {
+  const WaitronPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +13,14 @@ class WaitronPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
               Tab(text: 'Requests'),
               Tab(text: 'Completed'),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             OrderList(status: 'Requested'),
             OrderList(status: 'Completed'),
@@ -31,7 +33,7 @@ class WaitronPage extends StatelessWidget {
 
 class OrderList extends StatelessWidget {
   final String status;
-  const OrderList({Key? key, required this.status}) : super(key: key);
+  const OrderList({super.key, required this.status});
   
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class OrderList extends StatelessWidget {
       stream: DBs().getOrderStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
         List<Orders> orders = snapshot.data!.docs
         .where((doc) => doc['status'] == status)
@@ -70,23 +72,23 @@ class OrderList extends StatelessWidget {
       context: context,
       builder: (context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Table: ${order.table}', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-              SizedBox(height: 8.0),
-              Text('Status: ${order.status}', style: TextStyle(fontSize: 16.0)),
-              SizedBox(height: 16.0),
-              Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+              Text('Table: ${order.table}', style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8.0),
+              Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0)),
+              const SizedBox(height: 16.0),
+              const Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: order.requests.map((request) {
                   return Text('${request.quantity} x ${request.item} (${request.notes})');
                 }).toList(),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               if (order.status == 'Requested')
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -98,7 +100,7 @@ class OrderList extends StatelessWidget {
                         DBs().updateOrderStatus(order.table, 'Placed');
                         Navigator.pop(context);
                       },
-                      child: Text('Approve Order'),
+                      child: const Text('Approve Order'),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -107,7 +109,7 @@ class OrderList extends StatelessWidget {
                         DBs().deleteOrder(order);
                         Navigator.pop(context);
                       },
-                      child: Text('Reject Order'),
+                      child: const Text('Reject Order'),
                     ),
                   ],
                 ),
@@ -121,7 +123,7 @@ class OrderList extends StatelessWidget {
                         DBs().updateOrderStatus(order.table, 'In Progress');
                         Navigator.pop(context);
                       },
-                      child: Text('Begin Order'),
+                      child: const Text('Begin Order'),
                     ),
                   ],
                 ),
@@ -136,7 +138,7 @@ class OrderList extends StatelessWidget {
                         DBs().updateOrderStatus(order.table, 'Completed');
                         Navigator.pop(context);
                       },
-                      child: Text('Finish Order'),
+                      child: const Text('Finish Order'),
                     ),
                   ],
                 ),
@@ -150,7 +152,7 @@ class OrderList extends StatelessWidget {
                         DBs().updateOrderStatus(order.table, 'Delivered');
                         Navigator.pop(context);
                       },
-                      child: Text('Deliver Order'),
+                      child: const Text('Deliver Order'),
                     ),
                   ],
                 ),

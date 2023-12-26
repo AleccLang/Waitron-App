@@ -4,7 +4,7 @@ import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 
 class MenuPage extends StatefulWidget {
-  const MenuPage({Key? key}) : super(key: key);
+  const MenuPage({super.key});
 
   @override
   MenuPageState createState() => MenuPageState();
@@ -20,11 +20,11 @@ class MenuPageState extends State<MenuPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               'Menu:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -55,7 +55,7 @@ class MenuPageState extends State<MenuPage> {
                       },
                     );
                   } else {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 },
               ),
@@ -65,7 +65,7 @@ class MenuPageState extends State<MenuPage> {
                 // Adds item to menu
                 addItemOptions(context);
               },
-              child: Text('Add item'),
+              child: const Text('Add item'),
             ),
           ],
         ),
@@ -79,23 +79,23 @@ class MenuPageState extends State<MenuPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Update Item Price'),
+          title: const Text('Update Item Price'),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: itemCodeEntry,
-              decoration: InputDecoration(labelText: 'Item Code'),
+              decoration: const InputDecoration(labelText: 'Item Code'),
             ),
             TextField(
               controller: itemDescriptionEntry,
-              decoration: InputDecoration(labelText: 'Item Description'),
+              decoration: const InputDecoration(labelText: 'Item Description'),
             ),
             TextField(
               controller: itemPriceEntry,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Item Price'),
+              decoration: const InputDecoration(labelText: 'Item Price'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               children: [
                 ElevatedButton(
@@ -115,7 +115,7 @@ class MenuPageState extends State<MenuPage> {
                     itemDescriptionEntry.clear();
                     itemPriceEntry.clear();
                   },
-                  child: Text('Add Item'),
+                  child: const Text('Add Item'),
                 ),
               ],
             ),
@@ -132,15 +132,15 @@ class MenuPageState extends State<MenuPage> {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text('Update Item'),
+        title: const Text('Update Item'),
         content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
             controller: itemPriceEntry,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Item Price'),
+            decoration: const InputDecoration(labelText: 'Item Price'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Wrap(
               alignment: WrapAlignment.spaceEvenly,
               children: [
@@ -154,7 +154,7 @@ class MenuPageState extends State<MenuPage> {
                     itemPriceEntry.clear();
                     Navigator.pop(context);
                     },
-                    child: Text('Update price'),
+                    child: const Text('Update price'),
                   ),
                 ElevatedButton(
                   onPressed: () {
@@ -168,13 +168,13 @@ class MenuPageState extends State<MenuPage> {
                     );
                     Navigator.pop(context);
                   },
-                  child: Text('Delete Item'),
+                  child: const Text('Delete Item'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
               ],
             ),

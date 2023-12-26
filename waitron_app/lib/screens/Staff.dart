@@ -4,7 +4,7 @@ import 'package:waitron_app/screens/MenuPage.dart';
 import 'package:waitron_app/screens/WaitronPage.dart';
 
 class Staff extends StatefulWidget {
-  const Staff({Key? key}) : super(key: key);
+  const Staff({super.key});
 
   @override
   StaffPageState createState() => StaffPageState();
@@ -31,9 +31,9 @@ class StaffPageState extends State<Staff> {
         });
       },
       children: [
-        WaitronPage(),
-        KitchenPage(),
-        MenuPage(),
+        const WaitronPage(),
+        const KitchenPage(),
+        const MenuPage(),
       ],
     ),
     bottomNavigationBar: BottomNavigationBar(
