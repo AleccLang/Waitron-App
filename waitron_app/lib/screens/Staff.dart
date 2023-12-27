@@ -15,12 +15,13 @@ class StaffPageState extends State<Staff> {
   int currentIndex = 0;
   PageController pageController = PageController(initialPage: 0);
 
-  final navigationBarItems = [
+  final navigationBarItems = [ 
     const BottomNavigationBarItem(icon: Icon(Icons.person, color: Color.fromARGB(255,97,166,171)), label: "Waitron",),
     const BottomNavigationBarItem(icon: Icon(Icons.kitchen, color: Color.fromARGB(255,97,166,171)), label: "Kitchen",),
     const BottomNavigationBarItem(icon: Icon(Icons.menu_book, color: Color.fromARGB(255,97,166,171)), label: "Menu",),
   ];
 
+  // Controls navigation between the Waitron, Kitchen and Menu pages
   @override
   Widget build(BuildContext context) => Scaffold(
     body: PageView(

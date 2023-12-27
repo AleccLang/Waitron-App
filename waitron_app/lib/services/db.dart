@@ -7,7 +7,7 @@ class DBs {
   final CollectionReference orderCollection = FirebaseFirestore.instance.collection('orders');
   final CollectionReference itemCollection = FirebaseFirestore.instance.collection('items');
 
-  // Orders snapshot and CRUD methods
+  // Orders CRUD methods
 
   // Create order.
   Future addOrder(Orders order) async {

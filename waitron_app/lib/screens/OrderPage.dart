@@ -340,8 +340,8 @@ class OrderPageState extends State<OrderPage> {
                          OrderList.orderOptions(context, orders[index], false);
                       },
                       child: ListTile(
-                        title: Text('Table: ${orders[index].table}',  style: TextStyle(color: Colors.black)),
-                        subtitle: Text('Status: ${orders[index].status}',  style: TextStyle(color: Colors.black)),
+                        title: Text('Table: ${orders[index].table}',  style: const TextStyle(color: Colors.black)),
+                        subtitle: Text('Status: ${orders[index].status}',  style: const TextStyle(color: Colors.black)),
                       ),
                     );
                   },

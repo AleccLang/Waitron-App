@@ -37,8 +37,8 @@ class KitchenPage extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            OrderList(status: 'Placed'),
-            OrderList(status: 'In Progress'),
+            OrderList(status: 'Placed'), // List of orders with the status 'Placed'
+            OrderList(status: 'In Progress'),  // List of orders with the status 'In Progress'
           ],
         ),
       ),

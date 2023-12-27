@@ -39,8 +39,8 @@ class WaitronPage extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            OrderList(status: 'Requested'),
-            OrderList(status: 'Completed'),
+            OrderList(status: 'Requested'), // List of orders with the status 'Requested'
+            OrderList(status: 'Completed'), // List of orders with the status 'Completed'
           ],
         ),
       ),
@@ -85,7 +85,7 @@ class OrderList extends StatelessWidget {
     );
   }
 
-  // Shows an orders details and controls the actions taken on an order in the list.
+  // Shows an order's details and controls the actions taken on an order in the list.
   static void orderOptions(BuildContext context, Orders order, bool waitron) {
     showDialog(
       context: context,
@@ -116,7 +116,7 @@ class OrderList extends StatelessWidget {
                 children: [
                   ElevatedButton( // Approve order
                     onPressed: () {
-                      // ***** Notify customer *****
+                      // Send notification
                       NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
@@ -131,7 +131,7 @@ class OrderList extends StatelessWidget {
                   ),
                   ElevatedButton( // Reject order
                     onPressed: () {
-                      // ***** Notify customer *****
+                      // Send notification
                       NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
@@ -184,14 +184,13 @@ class OrderList extends StatelessWidget {
                   ),
                 ],
               ),
-            if (order.status == 'In Progress'  && waitron == true)
+            if (order.status == 'In Progress'  && waitron == true) // Finish the order
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Finish the order
-                      // ***** Notify waitron *****
+                      // Send notification
                       NotificationService().showNotification("Order Completed", "Order for table ${order.table} has been completed");
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);

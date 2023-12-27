@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Represents an order
 class Orders {
   String id;
   String table;
@@ -7,9 +8,10 @@ class Orders {
   String status;
   Timestamp time;
 
+  // Constructor for Orders class
   Orders({required this.id, required this.table,required this.requests,required this.status, required this.time});
 
-  
+  // Creates an Orders object from JSON data
   factory Orders.fromJson(Map<String, dynamic> json) {
     return Orders(
       id: json['id'],
@@ -26,6 +28,7 @@ class Orders {
     );
   }
 
+  // Converts an Orders object to a JSON representation
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -42,17 +45,16 @@ class Orders {
   }
 }
 
+// Represents a request within an order
 class Request {
   String item;
   String notes;
   int quantity;
 
-  Request({
-    required this.item,
-    required this.notes,
-    required this.quantity,
-  });
+  // Constructor for Request class
+  Request({required this.item, required this.notes,required this.quantity});
 
+  // Creates a Request from JSON data
   factory Request.fromJson(Map<String, dynamic> json) {
     return Request(
       item: json['item'],
@@ -61,6 +63,7 @@ class Request {
     );
   }
 
+  // Converts a Request to a JSON representation
   Map<String, dynamic> toJson() {
     return {
       'item': item,
@@ -70,14 +73,16 @@ class Request {
   }
 }
 
-
+// Represents an item in the menu
 class Item {
   String code;
   String description;
   int price;
 
+  // Constructor for the Item class
   Item({required this.code,required this.description,required this.price});
 
+  // Converts the Item object to a JSON representation
    Map<String,dynamic> toJson(){
     return {
       'code' : code,
@@ -86,6 +91,7 @@ class Item {
     };
   }
 
+  // Creates an Item object from JSON data
   factory Item.fromJson(Map<String,dynamic> json){
     return Item(
       code: json['code'],
@@ -94,6 +100,7 @@ class Item {
     );
   }
 
+  // Override equality operator to compare Item objects
   @override
   bool operator ==(Object other) {
     return (other is Item &&
@@ -101,7 +108,8 @@ class Item {
       other.description == description &&
       other.price == price);
   }
-
+  
+  // Override hashCode for equality comparisons
   @override
   int get hashCode => code.hashCode;
 }
