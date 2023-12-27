@@ -25,6 +25,11 @@ class DBs {
     orderCollection.doc(id).update({'status' : status});
   }
 
+  // Get orders by status
+  Stream<QuerySnapshot> getOrderStreamByStatus(String status) {
+    return orderCollection.where('status', isEqualTo: status).orderBy('time', descending: false).snapshots();
+  }
+
   // Read orders
   Stream<QuerySnapshot> getOrderStream() {
     return orderCollection.orderBy('time', descending: false).snapshots();
