@@ -33,17 +33,14 @@ class HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'waitron_app/lib/assets/logo.png', 
-                width: 200,
-                height: 200,
-              ),
-            const SizedBox(height: 20),
+              const SizedBox(height: 40),
+              Image.asset('lib/assets/logo.png', width: 300, height: 300),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(

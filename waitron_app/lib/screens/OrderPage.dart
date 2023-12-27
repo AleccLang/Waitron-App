@@ -404,7 +404,7 @@ class OrderPageState extends State<OrderPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 246, 246, 233)
               ),
-              child: const Text('Add Item to Order',  style: TextStyle(color: Colors.black)),
+              child: const Text('Add Item to Order', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

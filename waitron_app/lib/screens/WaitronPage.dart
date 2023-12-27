@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
+import 'package:waitron_app/services/NotificationService.dart';
 
 class WaitronPage extends StatelessWidget {
   const WaitronPage({super.key});
@@ -115,6 +116,7 @@ class OrderList extends StatelessWidget {
                   ElevatedButton( // Approve order
                     onPressed: () {
                       // ***** Notify customer *****
+                      NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
                     },
@@ -126,6 +128,7 @@ class OrderList extends StatelessWidget {
                   ElevatedButton( // Reject order
                     onPressed: () {
                       // ***** Notify customer *****
+                      NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
                     },
@@ -176,6 +179,7 @@ class OrderList extends StatelessWidget {
                     onPressed: () {
                       // Finish the order
                       // ***** Notify waitron *****
+                      NotificationService().showNotification("Order Completed", "Order for table ${order.table} has been completed");
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
                     },
