@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
-import 'package:waitron_app/services/NotificationService.dart';
 
 class WaitronPage extends StatelessWidget {
   const WaitronPage({super.key});
@@ -92,23 +91,23 @@ class OrderList extends StatelessWidget {
               }).toList(),
             ),
             const SizedBox(height: 15.0),
-            if (order.status == 'Requested' && waitron == true)  // Waitron approves/rejects the order request
+            if (order.status == 'Requested' && waitron == true)  // Customer approves/rejects the order request
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Approve order
+                  ElevatedButton(
                     onPressed: () {
+                      // Approve order
                       // ***** Notify customer *****
-                      NotificationService().showNotification('Order Approved', 'Your order has been approved!');
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
                     },
                     child: const Text('Approve'),
                   ),
-                  ElevatedButton( // Reject order
+                  ElevatedButton(
                     onPressed: () {
+                      // Reject order
                       // ***** Notify customer *****
-                      NotificationService().showNotification('Order Rejected', 'Your order has been rejected!');
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
                     },
@@ -116,12 +115,13 @@ class OrderList extends StatelessWidget {
                   ),
                 ],
               ),
-            if (order.status == 'Requested' && waitron == false) // Customer cancels their order request
+            if (order.status == 'Requested' && waitron == false) // Customer updates/cancels their order request
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Customer cancels order
+                  ElevatedButton(
                     onPressed: () {
+                      // Customer cancels order
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
                     },
@@ -133,8 +133,9 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Start work on the order
+                  ElevatedButton(
                     onPressed: () {
+                      // Start work on the order
                       DBs().updateOrderStatus(order.id, 'In Progress');
                       Navigator.pop(context);
                     },
@@ -146,10 +147,10 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Finish the order
+                  ElevatedButton(
                     onPressed: () {
+                      // Finish the order
                       // ***** Notify waitron *****
-                      NotificationService().showNotification('Order Complete', 'The order has been completed');
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
                     },
@@ -161,8 +162,9 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Collect the order
+                  ElevatedButton(
                     onPressed: () {
+                      // Collect the order
                       DBs().updateOrderStatus(order.id, 'Collected');
                       Navigator.pop(context);
                     },
@@ -174,8 +176,9 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Deliver the order
+                  ElevatedButton(
                     onPressed: () {
+                      // Deliver the order
                       DBs().updateOrderStatus(order.id, 'Delivered');
                       Navigator.pop(context);
                     },
