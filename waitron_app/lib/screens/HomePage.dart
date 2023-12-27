@@ -20,7 +20,7 @@ class HomePageState extends State<HomePage> {
           backgroundColor: const Color.fromARGB(255,97,166,171),
           actions: [
             IconButton( // Route to the staff pages
-              icon: const Icon(Icons.admin_panel_settings_rounded, size: 30),
+              icon: const Icon(Icons.admin_panel_settings_rounded, size: 30, color: Color.fromARGB(255, 246, 246, 233),),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -54,7 +54,8 @@ class HomePageState extends State<HomePage> {
                               borderSide: BorderSide(color: Color.fromARGB(255, 246, 246, 233)))
                           ),
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(color: Colors.black)
+                        style: const TextStyle(color: Colors.black),
+                        cursorColor: const Color.fromARGB(255, 246, 246, 233)
                       ),
                     ),  
                   ),

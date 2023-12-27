@@ -25,19 +25,19 @@ class DBs {
     orderCollection.doc(id).update({'status' : status});
   }
 
-  // Read orders
+  // Get all orders, ordered by the time they were placed
   Stream<QuerySnapshot> getOrderStream() {
     return orderCollection.orderBy('time', descending: false).snapshots();
   }
   
-  // Delete order
+  // Delete an order
   void deleteOrder(Orders order) {
     orderCollection.doc(order.id).delete();
   }
 
   // Items CRUD methods:
 
-  // Create item.
+  // Create an item.
   Future addItem(Item item) async {
     await itemCollection.doc(item.code).set(item.toJson());
   }

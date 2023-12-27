@@ -49,8 +49,8 @@ class MenuPageState extends State<MenuPage> {
                           },
                         // Display each item in the list
                         child: ListTile(
-                          title: Text('${items[index].description} - R${items[index].price}', style: const TextStyle(color: Colors.black)),
-                          subtitle: Text('Item code - ${items[index].code}', style: const TextStyle(color: Colors.black)),
+                          title: Text('${String.fromCharCode(0x2022)} ${items[index].description} - R${items[index].price}', style: const TextStyle(color: Colors.black)),
+                          subtitle: Text('   Item code - ${items[index].code}', style: const TextStyle(color: Colors.black)),
                         ),
                         );
                       },
@@ -97,8 +97,9 @@ class MenuPageState extends State<MenuPage> {
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black))
-              )
+                  borderSide: BorderSide(color: Colors.black)),
+              ),
+              cursorColor: const Color.fromARGB(255, 97, 166, 171)
             ),
             TextField(
               controller: itemDescriptionEntry,
@@ -109,7 +110,8 @@ class MenuPageState extends State<MenuPage> {
                   borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
-              )
+              ),
+              cursorColor: const Color.fromARGB(255, 97, 166, 171)
             ),
             TextField(
               controller: itemPriceEntry,
@@ -121,7 +123,8 @@ class MenuPageState extends State<MenuPage> {
                   borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
-              )
+              ),
+              cursorColor: const Color.fromARGB(255, 97, 166, 171)
             ),
             const SizedBox(height: 16.0),
             Row(
@@ -180,7 +183,8 @@ class MenuPageState extends State<MenuPage> {
                   borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
-              )
+              ),
+              cursorColor: const Color.fromARGB(255, 97, 166, 171)
             ),
             const SizedBox(height: 16.0),
             Wrap(

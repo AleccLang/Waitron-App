@@ -31,6 +31,7 @@ class WaitronPage extends StatelessWidget {
                 ),
               ),
             ],
+            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 217, 241, 242)),
             indicatorColor: Color.fromARGB(255, 97, 166, 171),
             labelColor: Color.fromARGB(255, 97, 166, 171),
             unselectedLabelColor: Colors.black
@@ -47,7 +48,7 @@ class WaitronPage extends StatelessWidget {
   }
 }
 
-// Builds and outputs list of Orders depending on their status
+// Builds and outputs a list of Orders depending on their status
 class OrderList extends StatelessWidget {
   final String status;
   const OrderList({super.key, required this.status});
@@ -74,8 +75,8 @@ class OrderList extends StatelessWidget {
                   orderOptions(context, orders[index], true);
               },
               child: ListTile(
-                title: Text('Table: ${orders[index].table}', style: const TextStyle(color: Colors.black)),
-                subtitle: Text('Status: ${orders[index].status}', style: const TextStyle(color: Colors.black)),
+                title: Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}', style: const TextStyle(color: Colors.black)),
+                subtitle: Text('   Status: ${orders[index].status}', style: const TextStyle(color: Colors.black)),
               ),
             );
           },

@@ -29,6 +29,7 @@ class KitchenPage extends StatelessWidget {
                 ),
               ),
             ],
+            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 217, 241, 242)),
             indicatorColor: Color.fromARGB(255, 97, 166, 171),
             labelColor: Color.fromARGB(255, 97, 166, 171),
             unselectedLabelColor: Colors.black
