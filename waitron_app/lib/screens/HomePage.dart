@@ -18,11 +18,11 @@ class HomePageState extends State<HomePage> {
     return ScaffoldMessenger(
       key: noTableKey,
       child: Scaffold(
-        backgroundColor: const Color.fromRGBO(104, 23, 186, 1),
+        backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
-          title: const Text('Restaurant App'),
+          backgroundColor: const Color.fromARGB(255,97,166,171),
           actions: [
-            IconButton(
+            IconButton( // Route to the staff pages
               icon: const Icon(Icons.admin_panel_settings_rounded, size: 30),
               onPressed: () {
                 Navigator.push(
@@ -38,37 +38,54 @@ class HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Image.asset(
+                'waitron_app/lib/assets/logo.png', 
+                width: 200,
+                height: 200,
+              ),
+            const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
                     child: SizedBox(
                       child: TextField(
                         controller: tableNumEntry,
-                        decoration: const InputDecoration(labelText: 'Table Number'),
+                        decoration: 
+                          const InputDecoration(labelText: 'Table Number', 
+                            labelStyle: TextStyle(
+                              color: Colors.black), 
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color.fromARGB(255, 246, 246, 233))),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color.fromARGB(255, 246, 246, 233)))
+                          ),
                         keyboardType: TextInputType.number,
+                        style: const TextStyle(color: Colors.black)
                       ),
                     ),  
                   ),
                   const SizedBox(width: 15.0),
                   ElevatedButton(
                     onPressed: () {
-                      if (tableNumEntry.text.isEmpty) {
-                        // Show error message
+                      if (tableNumEntry.text.isEmpty) { // Error msg if no table num is entered
+  
                         noTableKey.currentState?.showSnackBar(
                           const SnackBar(
-                            content: Text('Please enter a table number.'),
+                            content: Text('Please enter a table number.')
                           ),
                         );
                       } else {
-                        // Order page
-                        Navigator.push(
+                        Navigator.push( // Navigate to order page
                           context,
                           MaterialPageRoute(builder: (context) => OrderPage(tableNumber: tableNumEntry.text)),
                         );
                         FocusScope.of(context).unfocus();
                       }
                     },
-                    child: const Text('Place Order'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                    ),
+                    child: const Text('Place Order', style: TextStyle(color: Colors.black)),
                   ),
                 ]
               ),

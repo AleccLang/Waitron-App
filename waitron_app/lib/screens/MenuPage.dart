@@ -18,7 +18,7 @@ class MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(toolbarHeight: 9.0),
       body: Padding(
         padding:  const EdgeInsets.all(15.0),
         child: Column(
@@ -60,9 +60,8 @@ class MenuPageState extends State<MenuPage> {
                 },
               ),
             ),
-            ElevatedButton(
+            ElevatedButton( // Adds item to menu
               onPressed: () {
-                // Adds item to menu
                 addItemOptions(context);
               },
               child: const Text('Add item'),

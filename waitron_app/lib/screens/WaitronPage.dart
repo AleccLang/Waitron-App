@@ -12,6 +12,7 @@ class WaitronPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 9.0,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Requests'),

@@ -38,18 +38,33 @@ class OrderPageState extends State<OrderPage> {
       }
     });
   }
-    @override
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
-          title: const Text('Order Page'),
+          toolbarHeight: 9.0,
+          backgroundColor: const Color.fromARGB(255,246,246,233),
           bottom: const TabBar(
             tabs: [
-              Tab(text: 'Place Order'),
-              Tab(text: 'Table Orders'),
+              Tab(
+                child: Text(
+                  'Place Order',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Table Orders',
+                  style: TextStyle(color: Colors.black),
+                ),
+              )
             ],
+            indicatorColor: Color.fromARGB(255, 97, 166, 171),
+            labelColor: Color.fromARGB(255, 97, 166, 171),
+            unselectedLabelColor: Colors.black
           ),
         ),
         body: TabBarView(
@@ -97,7 +112,10 @@ class OrderPageState extends State<OrderPage> {
                   onPressed: () {
                     addItemToOrder(context);
                   },
-                  child: const Text('Add item to Order'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  ),
+                  child: const Text('Add item to Order',  style: TextStyle(color: Colors.black)),
                 ),
                 ElevatedButton( // Sends order request
                   onPressed: () {
@@ -114,7 +132,10 @@ class OrderPageState extends State<OrderPage> {
                       orderRequests = [];
                     });
                   },
-                  child: const Text('Request Order'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  ),
+                  child: const Text('Request Order',  style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
@@ -129,7 +150,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Item Options'),
+          title: const Text('Item Options',  style: TextStyle(color: Colors.black)),
           content: Wrap(
             alignment: WrapAlignment.spaceEvenly,
             children: [
@@ -140,20 +161,29 @@ class OrderPageState extends State<OrderPage> {
                   });
                   Navigator.pop(context);
                 },
-                child: const Text('Remove'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                ),
+                child: const Text('Remove',  style: TextStyle(color: Colors.black)),
               ),
               ElevatedButton( // Update the item
                 onPressed: () {
                   Navigator.pop(context);
                   updateItem(context, index);
                 },
-                child: const Text('Update'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                ),
+                child: const Text('Update',  style: TextStyle(color: Colors.black)),
               ),
               ElevatedButton( // Cancel
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('Cancel'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                ),
+                child: const Text('Cancel',  style: TextStyle(color: Colors.black)),
               ),
             ],
           ),
@@ -172,7 +202,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Update Item'),
+          title: const Text('Update Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             StreamBuilder<QuerySnapshot>(
@@ -231,7 +261,7 @@ class OrderPageState extends State<OrderPage> {
                   selectedMenuItem = null;
                 });
               },
-              child: const Text('Update item'),
+              child: const Text('Update item',  style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
@@ -249,7 +279,7 @@ class OrderPageState extends State<OrderPage> {
         children: [
           const Text(
             'Order Requests:',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           Expanded(
             child:StreamBuilder<QuerySnapshot>(
@@ -272,8 +302,8 @@ class OrderPageState extends State<OrderPage> {
                          OrderList.orderOptions(context, orders[index], false);
                       },
                       child: ListTile(
-                        title: Text('Table: ${orders[index].table}'),
-                        subtitle: Text('Status: ${orders[index].status}'),
+                        title: Text('Table: ${orders[index].table}',  style: TextStyle(color: Colors.black)),
+                        subtitle: Text('Status: ${orders[index].status}',  style: TextStyle(color: Colors.black)),
                       ),
                     );
                   },
@@ -292,7 +322,8 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Add Item'),
+          backgroundColor: const Color.fromARGB(255,246,246,233),
+          title: const Text('Add Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             StreamBuilder<QuerySnapshot>(
@@ -305,6 +336,7 @@ class OrderPageState extends State<OrderPage> {
                     .toList();
 
                   return DropdownButtonFormField<Item>(
+                    dropdownColor: const Color.fromARGB(255,246,246,233),
                     value: selectedMenuItem = items.first,
                     onChanged: (value) {
                       setState(() {
@@ -316,7 +348,14 @@ class OrderPageState extends State<OrderPage> {
                           value: item,
                           child: Text(item.description),
                         )).toList(),
-                    decoration: const InputDecoration(labelText: 'Select Item'),
+                    decoration: const InputDecoration(labelText: 'Select Item',
+                      labelStyle: TextStyle(
+                        color: Colors.black), 
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))
+                    ),
                   );
                 } 
                 else {
@@ -326,12 +365,26 @@ class OrderPageState extends State<OrderPage> {
             ),
             TextField(
               controller: notesEntry,
-              decoration: const InputDecoration(labelText: 'Notes'),
+              decoration: const InputDecoration(labelText: 'Notes',
+                labelStyle: TextStyle(
+                  color: Colors.black), 
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black))
+              ),
             ),
             TextField(
               controller: quantityEntry,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Quantity'),
+              decoration: const InputDecoration(labelText: 'Quantity',
+                labelStyle: TextStyle(
+                  color: Colors.black), 
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black))
+              )
             ),
             const SizedBox(height: 15.0),
             ElevatedButton( // Adds the item to the request
@@ -348,7 +401,10 @@ class OrderPageState extends State<OrderPage> {
                   selectedMenuItem = null;
                 });
               },
-              child: const Text('Add Item to Order'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+              ),
+              child: const Text('Add Item to Order',  style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
