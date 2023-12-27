@@ -18,7 +18,8 @@ class MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 9.0),
+      backgroundColor: const Color.fromARGB(255,97,166,171),
+      appBar: AppBar(toolbarHeight: 9.0, backgroundColor: const Color.fromARGB(255,97,166,171)),
       body: Padding(
         padding:  const EdgeInsets.all(15.0),
         child: Column(
@@ -26,7 +27,7 @@ class MenuPageState extends State<MenuPage> {
           children: [
             const Text(
               'Menu:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
             ),
             // Items on the menu
             Expanded(
@@ -64,7 +65,10 @@ class MenuPageState extends State<MenuPage> {
               onPressed: () {
                 addItemOptions(context);
               },
-              child: const Text('Add item'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+              ),
+              child: const Text('Add item', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
@@ -78,29 +82,50 @@ class MenuPageState extends State<MenuPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: const Color.fromARGB(255,246,246,233),
           title: const Text('Update Item Price'),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: itemCodeEntry,
-              decoration: const InputDecoration(labelText: 'Item Code'),
+              decoration: const InputDecoration(labelText: 'Item Code',
+                labelStyle: TextStyle(
+                  color: Colors.black), 
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black))
+              )
             ),
             TextField(
               controller: itemDescriptionEntry,
-              decoration: const InputDecoration(labelText: 'Item Description'),
+              decoration: const InputDecoration(labelText: 'Item Description',
+                labelStyle: TextStyle(
+                  color: Colors.black), 
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black))
+              )
             ),
             TextField(
               controller: itemPriceEntry,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Item Price'),
+              decoration: const InputDecoration(labelText: 'Item Price',
+                labelStyle: TextStyle(
+                  color: Colors.black), 
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black))
+              )
             ),
             const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
+                ElevatedButton( // Add an item to the menu
                   onPressed: () {
-                    // Add an item to the menu
                     DBs().addItem(
                       Item(
                         code: itemCodeEntry.text,
@@ -115,7 +140,10 @@ class MenuPageState extends State<MenuPage> {
                     itemDescriptionEntry.clear();
                     itemPriceEntry.clear();
                   },
-                  child: const Text('Add Item'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  ),
+                  child: const Text('Add Item', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
@@ -132,21 +160,28 @@ class MenuPageState extends State<MenuPage> {
     context: context,
     builder: (context) {
       return AlertDialog(
+        backgroundColor: const Color.fromARGB(255,246,246,233),
         title: const Text('Update Item'),
         content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
             controller: itemPriceEntry,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: 'Item Price'),
+            decoration: const InputDecoration(labelText: 'Item Price',
+                labelStyle: TextStyle(
+                  color: Colors.black), 
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black))
+              )
             ),
             const SizedBox(height: 16.0),
             Wrap(
               alignment: WrapAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
+                ElevatedButton( // Update an item's price
                   onPressed: (){
-                    // Update an item's price
                     DBs().updatePrice(
                       item.code,
                       int.tryParse(itemPriceEntry.text) ?? 0,
@@ -154,11 +189,13 @@ class MenuPageState extends State<MenuPage> {
                     itemPriceEntry.clear();
                     Navigator.pop(context);
                     },
-                    child: const Text('Update price'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                    ),
+                    child: const Text('Update price', style: TextStyle(color: Colors.black)),
                   ),
-                ElevatedButton(
+                ElevatedButton( // Delete an item from the menu
                   onPressed: () {
-                    // Delete an item from the menu
                     DBs().deleteItem(
                       Item(
                         code: item.code,
@@ -168,13 +205,19 @@ class MenuPageState extends State<MenuPage> {
                     );
                     Navigator.pop(context);
                   },
-                  child: const Text('Delete Item'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  ),
+                  child: const Text('Delete Item', style: TextStyle(color: Colors.black)),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Cancel'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  ),
+                  child: const Text('Cancel', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
