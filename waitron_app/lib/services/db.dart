@@ -7,7 +7,6 @@ class DBs {
   final CollectionReference orderCollection = FirebaseFirestore.instance.collection('orders');
   final CollectionReference itemCollection = FirebaseFirestore.instance.collection('items');
 
-
   // Orders snapshot and CRUD methods
 
   // Create order.
@@ -16,9 +15,14 @@ class DBs {
     await orderCollection.doc(order.id).set(order.toJson());
   }
 
+  // Update order request
+  void updateOrderRequest(Orders order, List<Request> requests) async{
+    orderCollection.doc(order.id).update({'requests' : order.requests});
+  }
+
   // Update order status
-  void updateOrderStatus(String table, String status) async{
-    orderCollection.doc(table).update({'status' : status});
+  void updateOrderStatus(String id, String status) async{
+    orderCollection.doc(id).update({'status' : status});
   }
 
   // Read orders
@@ -28,7 +32,7 @@ class DBs {
   
   // Delete order
   void deleteOrder(Orders order) {
-    orderCollection.doc(order.table).delete();
+    orderCollection.doc(order.id).delete();
   }
 
   // Items CRUD methods:

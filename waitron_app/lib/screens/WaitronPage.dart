@@ -54,7 +54,7 @@ class OrderList extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                  orderOptions(context, orders[index]);
+                  orderOptions(context, orders[index], true);
               },
               child: ListTile(
                 title: Text('Table: ${orders[index].table}'),
@@ -68,7 +68,7 @@ class OrderList extends StatelessWidget {
   }
 
   // Shows an orders details and controls the actions taken on an order in the list.
-  void orderOptions(BuildContext context, Orders order) {
+  static void orderOptions(BuildContext context, Orders order, bool waitron) {
     showDialog(
       context: context,
       builder: (context) {
@@ -91,7 +91,7 @@ class OrderList extends StatelessWidget {
               }).toList(),
             ),
             const SizedBox(height: 15.0),
-            if (order.status == 'Requested')
+            if (order.status == 'Requested' && waitron == true)  // Customer approves/rejects the order request
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -115,21 +115,35 @@ class OrderList extends StatelessWidget {
                   ),
                 ],
               ),
-            if (order.status == 'Placed')
+            if (order.status == 'Requested' && waitron == false) // Customer updates/cancels their order request
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Customer cancels order
+                      DBs().deleteOrder(order);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              ),
+            if (order.status == 'Placed'  && waitron == true)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     onPressed: () {
                       // Start work on the order
-                      DBs().updateOrderStatus(order.table, 'In Progress');
+                      DBs().updateOrderStatus(order.id, 'In Progress');
                       Navigator.pop(context);
                     },
                     child: const Text('Begin Order'),
                   ),
                 ],
               ),
-            if (order.status == 'In Progress')
+            if (order.status == 'In Progress'  && waitron == true)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -137,21 +151,35 @@ class OrderList extends StatelessWidget {
                     onPressed: () {
                       // Finish the order
                       // ***** Notify waitron *****
-                      DBs().updateOrderStatus(order.table, 'Completed');
+                      DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
                     },
                     child: const Text('Finish Order'),
                   ),
                 ],
               ),
-            if (order.status == 'Completed')
+            if (order.status == 'Completed' && waitron == false) // Customer collects the order
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Collect the order
+                      DBs().updateOrderStatus(order.id, 'Collected');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Collect Order'),
+                  ),
+                ],
+              ),
+            if (order.status == 'Completed' && waitron == true) // Waitron collects the order
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     onPressed: () {
                       // Deliver the order
-                      DBs().updateOrderStatus(order.table, 'Delivered');
+                      DBs().updateOrderStatus(order.id, 'Delivered');
                       Navigator.pop(context);
                     },
                     child: const Text('Deliver Order'),

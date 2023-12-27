@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
+import 'package:waitron_app/screens/WaitronPage.dart';
 
 class OrderPage extends StatefulWidget {
   final tableNumber;
@@ -61,14 +62,13 @@ class OrderPageState extends State<OrderPage> {
     );
   }
 
-  // Tab to create an order for the table
+  // Tab to create an order request for the table
   Widget createOrderTab(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // List of items in the order
             const Text(
               'Order:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -77,10 +77,15 @@ class OrderPageState extends State<OrderPage> {
               child: ListView.builder(
                 itemCount: orderRequests.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(orderRequests[index].item),
-                    subtitle: Text(
-                        'Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}'),
+                  return GestureDetector(
+                    onTap: () {
+                      itemOptions(context, index);
+                    },
+                    child: ListTile(
+                        title: Text(orderRequests[index].item),
+                        subtitle: Text(
+                            'Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}'),
+                    ),
                   );
                 },
               ),
@@ -88,16 +93,14 @@ class OrderPageState extends State<OrderPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
+                ElevatedButton( // Adds an item to current order
                   onPressed: () {
-                    // Request the order
                     addItemToOrder(context);
                   },
                   child: const Text('Add item to Order'),
                 ),
-                ElevatedButton(
+                ElevatedButton( // Sends order request
                   onPressed: () {
-                    // Request the order
                     DBs().addOrder(
                       Orders(
                         id: "",
@@ -119,6 +122,123 @@ class OrderPageState extends State<OrderPage> {
         ),
       );
     }
+
+  // Remove or update item in current order request
+  void itemOptions(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Item Options'),
+          content: Wrap(
+            alignment: WrapAlignment.spaceEvenly,
+            children: [
+              ElevatedButton( // Remove the item
+                onPressed: () {
+                  setState(() {
+                    orderRequests.removeAt(index);
+                  });
+                  Navigator.pop(context);
+                },
+                child: const Text('Remove'),
+              ),
+              ElevatedButton( // Update the item
+                onPressed: () {
+                  Navigator.pop(context);
+                  updateItem(context, index);
+                },
+                child: const Text('Update'),
+              ),
+              ElevatedButton( // Cancel
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancel'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+  // Updates the selected item
+  void updateItem(BuildContext context, int index) {
+    String currentItem = orderRequests[index].item;
+    final TextEditingController currentNotes = TextEditingController(text: orderRequests[index].notes);
+    final TextEditingController currentQuantity = TextEditingController(text: orderRequests[index].quantity.toString());
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Update Item'),
+          content: Column( mainAxisSize: MainAxisSize.min,
+          children: [
+            StreamBuilder<QuerySnapshot>(
+              stream: DBs().getItemStream(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Item> items = snapshot.data!.docs
+                    .map((doc) =>
+                    Item.fromJson(doc.data() as Map<String, dynamic>))
+                    .toList();
+
+                  return DropdownButtonFormField<Item>(
+                    value: selectedMenuItem = items.firstWhere(
+                        (item) => item.description == currentItem,
+                        orElse: () => items.first),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedMenuItem = value!;
+                      });
+                    },
+                    items: items
+                        .map((item) => DropdownMenuItem<Item>(
+                          value: item,
+                          child: Text(item.description),
+                        )).toList(),
+                    decoration: const InputDecoration(labelText: 'Select Item'),
+                  );
+                } 
+                else {
+                  return const CircularProgressIndicator();
+                }
+              },
+            ),
+            TextField(
+              controller: currentNotes,
+              decoration: const InputDecoration(labelText: 'Notes'),
+            ),
+            TextField(
+              controller: currentQuantity,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Quantity'),
+            ),
+            const SizedBox(height: 15.0),
+            ElevatedButton( // Adds the updated item to the request
+              onPressed: () {
+                setState(() {
+                  orderRequests.removeAt(index);
+                  orderRequests.add(Request(
+                    item: selectedMenuItem?.description ?? '',
+                    notes: currentNotes.text,
+                    quantity: int.tryParse(currentQuantity.text) ?? 1,)
+                  );
+                  Navigator.pop(context);
+                  notesEntry.clear();
+                  quantityEntry.clear();
+                  selectedMenuItem = null;
+                });
+              },
+              child: const Text('Update item'),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+  }
 
   // Tab to list all orders for the table
   Widget listOrdersTab(BuildContext context) {
@@ -149,7 +269,7 @@ class OrderPageState extends State<OrderPage> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                          collectOrder(context, orders[index]);
+                         OrderList.orderOptions(context, orders[index], false);
                       },
                       child: ListTile(
                         title: Text('Table: ${orders[index].table}'),
@@ -175,7 +295,6 @@ class OrderPageState extends State<OrderPage> {
           title: const Text('Add Item'),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
-            // List of all items on the menu
             StreamBuilder<QuerySnapshot>(
               stream: DBs().getItemStream(),
               builder: (context, snapshot) {
@@ -215,9 +334,8 @@ class OrderPageState extends State<OrderPage> {
               decoration: const InputDecoration(labelText: 'Quantity'),
             ),
             const SizedBox(height: 15.0),
-            ElevatedButton(
+            ElevatedButton( // Adds the item to the request
               onPressed: () {
-                // Adds the request to the list
                 setState(() {
                   orderRequests.add(Request(
                     item: selectedMenuItem?.description ?? '',
@@ -237,50 +355,5 @@ class OrderPageState extends State<OrderPage> {
       );
     },
   );
-  }
-
-  // Allows user to collect their own order
-  void collectOrder(BuildContext context, Orders order) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Column( mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Table: ${order.table}', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8.0),
-            Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0)),
-            const SizedBox(height: 15.0),
-            const Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: order.requests.map((request) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Text('${request.quantity} x ${request.item} (${request.notes})')
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 15.0),
-            if (order.status == 'Completed')
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Collect the order
-                      DBs().updateOrderStatus(order.id, 'Collected');
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Collect Order'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 }
