@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:waitron_app/screens/HomePage.dart';
 import 'package:waitron_app/services/NotificationService.dart';
 import 'firebase_options.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 void main() async {
@@ -19,8 +20,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.montserratTextTheme(),
+      ),
+      home: const HomePage(),
     );
   }
 }

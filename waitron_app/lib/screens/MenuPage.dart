@@ -49,8 +49,8 @@ class MenuPageState extends State<MenuPage> {
                           },
                         // Display each item in the list
                         child: ListTile(
-                          title: Text('${items[index].description} - R${items[index].price}'),
-                          subtitle: Text('Item code - ${items[index].code}'),
+                          title: Text('${items[index].description} - R${items[index].price}', style: const TextStyle(color: Colors.black)),
+                          subtitle: Text('Item code - ${items[index].code}', style: const TextStyle(color: Colors.black)),
                         ),
                         );
                       },

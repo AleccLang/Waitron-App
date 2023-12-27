@@ -10,13 +10,13 @@ class HomePage extends StatefulWidget {
 }
   
 class HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldMessengerState> noTableKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> tableNumKey = GlobalKey<ScaffoldMessengerState>();
   final TextEditingController tableNumEntry = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
-      key: noTableKey,
+      key: tableNumKey,
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
@@ -66,7 +66,7 @@ class HomePageState extends State<HomePage> {
                     onPressed: () {
                       if (tableNumEntry.text.isEmpty) { // Error msg if no table num is entered
   
-                        noTableKey.currentState?.showSnackBar(
+                        tableNumKey.currentState?.showSnackBar(
                           const SnackBar(
                             content: Text('Please enter a table number.')
                           ),

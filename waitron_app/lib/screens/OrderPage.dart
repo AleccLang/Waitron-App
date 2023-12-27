@@ -115,7 +115,7 @@ class OrderPageState extends State<OrderPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 246, 246, 233)
                   ),
-                  child: const Text('Add item to Order',  style: TextStyle(color: Colors.black)),
+                  child: const Text('Add to Order',  style: TextStyle(color: Colors.black)),
                 ),
                 ElevatedButton( // Sends order request
                   onPressed: () {
@@ -150,6 +150,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: const Color.fromARGB(255,246,246,233),
           title: const Text('Item Options',  style: TextStyle(color: Colors.black)),
           content: Wrap(
             alignment: WrapAlignment.spaceEvenly,
@@ -202,6 +203,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: const Color.fromARGB(255,246,246,233),
           title: const Text('Update Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -261,6 +263,9 @@ class OrderPageState extends State<OrderPage> {
                   selectedMenuItem = null;
                 });
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+              ),
               child: const Text('Update item',  style: TextStyle(color: Colors.black)),
             ),
           ],
@@ -404,7 +409,7 @@ class OrderPageState extends State<OrderPage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 246, 246, 233)
               ),
-              child: const Text('Add Item to Order', style: TextStyle(color: Colors.black)),
+              child: const Text('Add to Order', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),

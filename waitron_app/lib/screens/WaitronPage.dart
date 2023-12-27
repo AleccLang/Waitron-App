@@ -74,8 +74,8 @@ class OrderList extends StatelessWidget {
                   orderOptions(context, orders[index], true);
               },
               child: ListTile(
-                title: Text('Table: ${orders[index].table}'),
-                subtitle: Text('Status: ${orders[index].status}'),
+                title: Text('Table: ${orders[index].table}', style: const TextStyle(color: Colors.black)),
+                subtitle: Text('Status: ${orders[index].status}', style: const TextStyle(color: Colors.black)),
               ),
             );
           },
