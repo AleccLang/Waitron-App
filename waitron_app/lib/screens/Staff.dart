@@ -16,9 +16,9 @@ class StaffPageState extends State<Staff> {
   PageController pageController = PageController(initialPage: 0);
 
   final navigationBarItems = [
-    const BottomNavigationBarItem(icon: Icon(Icons.person, color: Colors.blueGrey,), label: "Waitron",),
-    const BottomNavigationBarItem(icon: Icon(Icons.kitchen, color: Colors.blueGrey), label: "Kitchen",),
-    const BottomNavigationBarItem(icon: Icon(Icons.menu_book, color: Colors.blueGrey), label: "Menu",),
+    const BottomNavigationBarItem(icon: Icon(Icons.person, color: Color.fromARGB(255,97,166,171)), label: "Waitron",),
+    const BottomNavigationBarItem(icon: Icon(Icons.kitchen, color: Color.fromARGB(255,97,166,171)), label: "Kitchen",),
+    const BottomNavigationBarItem(icon: Icon(Icons.menu_book, color: Color.fromARGB(255,97,166,171)), label: "Menu",),
   ];
 
   @override
@@ -30,18 +30,30 @@ class StaffPageState extends State<Staff> {
           currentIndex = newIndex;
         });
       },
-      children: [
-        const WaitronPage(),
-        const KitchenPage(),
-        const MenuPage(),
+      children: const [
+        WaitronPage(),
+        KitchenPage(),
+        MenuPage(),
       ],
     ),
-    bottomNavigationBar: BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: (index){
-        pageController.animateToPage(index, duration: const Duration(milliseconds: 350), curve: Curves.linear);
-      },
-      items: navigationBarItems, 
-    ),
+    bottomNavigationBar: Container(
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 246, 246, 233),
+        border: Border(
+          top: BorderSide(color: Colors.black.withOpacity(0.1), width: 1.0),
+        ),
+      ),
+      child: BottomNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+        selectedItemColor: const Color.fromARGB(255,97,166,171),
+        unselectedItemColor: Colors.black,
+        currentIndex: currentIndex,
+        elevation: 4,
+        onTap: (index){
+          pageController.animateToPage(index, duration: const Duration(milliseconds: 350), curve: Curves.linear);
+        },
+        items: navigationBarItems, 
+      ),
+    )
   );
 }
