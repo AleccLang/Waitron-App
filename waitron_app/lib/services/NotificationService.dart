@@ -12,7 +12,7 @@ class NotificationService {
   // Shows a notification
   Future showNotification(String title, String body) async {
     const NotificationDetails androidChannelSpecifics = NotificationDetails(
-      android: AndroidNotificationDetails('channelId', 'channelName', importance: Importance.max));
+      android: AndroidNotificationDetails('channel1', 'notification', importance: Importance.max));
     return notificationsPlugin.show(0, title, body, androidChannelSpecifics);
   }
   

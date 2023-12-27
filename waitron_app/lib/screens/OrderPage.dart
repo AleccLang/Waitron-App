@@ -113,7 +113,10 @@ class OrderPageState extends State<OrderPage> {
                     addItemToOrder(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                    )
                   ),
                   child: const Text('Add to Order',  style: TextStyle(color: Colors.black)),
                 ),
@@ -133,7 +136,10 @@ class OrderPageState extends State<OrderPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                    )
                   ),
                   child: const Text('Request Order',  style: TextStyle(color: Colors.black)),
                 ),
@@ -163,7 +169,10 @@ class OrderPageState extends State<OrderPage> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                  shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                  )
                 ),
                 child: const Text('Remove',  style: TextStyle(color: Colors.black)),
               ),
@@ -173,7 +182,10 @@ class OrderPageState extends State<OrderPage> {
                   updateItem(context, index);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                  shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                  )
                 ),
                 child: const Text('Update',  style: TextStyle(color: Colors.black)),
               ),
@@ -182,7 +194,10 @@ class OrderPageState extends State<OrderPage> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                  shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                  )
                 ),
                 child: const Text('Cancel',  style: TextStyle(color: Colors.black)),
               ),
@@ -264,7 +279,10 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                ),
               ),
               child: const Text('Update item',  style: TextStyle(color: Colors.black)),
             ),
@@ -407,7 +425,10 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                ),
               ),
               child: const Text('Add to Order', style: TextStyle(color: Colors.black)),
             ),

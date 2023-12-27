@@ -10,14 +10,11 @@ class HomePage extends StatefulWidget {
 }
   
 class HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldMessengerState> tableNumKey = GlobalKey<ScaffoldMessengerState>();
   final TextEditingController tableNumEntry = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldMessenger(
-      key: tableNumKey,
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255,97,166,171),
@@ -65,8 +62,7 @@ class HomePageState extends State<HomePage> {
                   ElevatedButton(
                     onPressed: () {
                       if (tableNumEntry.text.isEmpty) { // Error msg if no table num is entered
-  
-                        tableNumKey.currentState?.showSnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Please enter a table number.')
                           ),
@@ -80,7 +76,10 @@ class HomePageState extends State<HomePage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Place Order', style: TextStyle(color: Colors.black)),
                   ),
@@ -89,7 +88,6 @@ class HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

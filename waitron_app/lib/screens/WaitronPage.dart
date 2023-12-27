@@ -120,8 +120,11 @@ class OrderList extends StatelessWidget {
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Approve', style: TextStyle(color: Colors.black)),
                   ),
@@ -132,8 +135,11 @@ class OrderList extends StatelessWidget {
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Reject', style: TextStyle(color: Colors.black)),
                   ),
@@ -148,8 +154,11 @@ class OrderList extends StatelessWidget {
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                ),
                     ),
                     child: const Text('Cancel', style: TextStyle(color: Colors.black)),
                   ),
@@ -164,8 +173,11 @@ class OrderList extends StatelessWidget {
                       DBs().updateOrderStatus(order.id, 'In Progress');
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                ),
                     ),
                     child: const Text('Begin Order', style: TextStyle(color: Colors.black)),
                   ),
@@ -183,8 +195,11 @@ class OrderList extends StatelessWidget {
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Finish Order', style: TextStyle(color: Colors.black)),
                   ),
@@ -200,8 +215,11 @@ class OrderList extends StatelessWidget {
                       DBs().updateOrderStatus(order.id, 'Collected');
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Collect Order', style: TextStyle(color: Colors.black)),
                   ),
@@ -217,8 +235,11 @@ class OrderList extends StatelessWidget {
                       DBs().updateOrderStatus(order.id, 'Delivered');
                       Navigator.pop(context);
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Deliver Order', style: TextStyle(color: Colors.black)),
                   ),

@@ -66,7 +66,10 @@ class MenuPageState extends State<MenuPage> {
                 addItemOptions(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)
+                ),
               ),
               child: const Text('Add item', style: TextStyle(color: Colors.black)),
             ),
@@ -140,8 +143,11 @@ class MenuPageState extends State<MenuPage> {
                     itemDescriptionEntry.clear();
                     itemPriceEntry.clear();
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                   style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                    shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)
+                    ),
                   ),
                   child: const Text('Add Item', style: TextStyle(color: Colors.black)),
                 ),
@@ -182,15 +188,26 @@ class MenuPageState extends State<MenuPage> {
               children: [
                 ElevatedButton( // Update an item's price
                   onPressed: (){
-                    DBs().updatePrice(
-                      item.code,
-                      int.tryParse(itemPriceEntry.text) ?? 0,
-                    );
-                    itemPriceEntry.clear();
-                    Navigator.pop(context);
+                    if (itemPriceEntry.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter a price.'),
+                        ),
+                      );
+                    } else {
+                      DBs().updatePrice(
+                        item.code,
+                        int.tryParse(itemPriceEntry.text) ?? 0,
+                      );
+                      itemPriceEntry.clear();
+                      Navigator.pop(context);
+                    }
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                     style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                     ),
                     child: const Text('Update price', style: TextStyle(color: Colors.black)),
                   ),
@@ -205,8 +222,11 @@ class MenuPageState extends State<MenuPage> {
                     );
                     Navigator.pop(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                   style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                   ),
                   child: const Text('Delete Item', style: TextStyle(color: Colors.black)),
                 ),
@@ -214,8 +234,11 @@ class MenuPageState extends State<MenuPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233)
+                   style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)
+                      ),
                   ),
                   child: const Text('Cancel', style: TextStyle(color: Colors.black)),
                 ),
