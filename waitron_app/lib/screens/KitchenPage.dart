@@ -10,13 +10,28 @@ class KitchenPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 246, 246, 233),
           toolbarHeight: 9.0,
           bottom: const TabBar(
             tabs: [
-              Tab(text: 'Placed'),
-              Tab(text: 'In Progress'),
+              Tab(
+                child: Text(
+                  'Placed',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'In Progress',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
             ],
+            indicatorColor: Color.fromARGB(255, 97, 166, 171),
+            labelColor: Color.fromARGB(255, 97, 166, 171),
+            unselectedLabelColor: Colors.black
           ),
         ),
         body: const TabBarView(
