@@ -23,6 +23,12 @@ class OrderPageState extends State<OrderPage> {
   
   OrderPageState(this.tableNumber);
 
+  @override // Removes active table from the DB when the page is left
+    void dispose() {
+      DBs().deleteActiveTable(Tables(tableNumber: tableNumber));
+      super.dispose();
+    }
+
   // Inits the item list and sets the selected item to default to the first
   @override
   void initState() {

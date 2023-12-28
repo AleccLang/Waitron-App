@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/screens/Staff.dart';
+import 'package:waitron_app/services/db.dart';
 import 'OrderPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +43,7 @@ class HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Expanded(
+                  Expanded( // Textbox for Table Number entry.
                     child: SizedBox(
                       child: TextField(
                         controller: tableNumEntry,
@@ -60,15 +63,26 @@ class HomePageState extends State<HomePage> {
                     ),  
                   ),
                   const SizedBox(width: 15.0),
-                  ElevatedButton(
-                    onPressed: () {
+                  ElevatedButton( // Button to go to OrderPage
+                    onPressed: () async {
+                      print(tableNumEntry.text);
+                      bool active = await DBs().isTableActive(Tables(tableNumber: tableNumEntry.text));
+                      if (active){ // Error msg to notify the table is already in use
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Table ${tableNumEntry.text} is already in use.')
+                          ),
+                        );
+                      }
                       if (tableNumEntry.text.isEmpty) { // Error msg if no table num is entered
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Please enter a table number.')
                           ),
                         );
-                      } else {
+                      }
+                      if (!active){
+                        DBs().addActiveTable(Tables(tableNumber: tableNumEntry.text));
                         Navigator.push( // Navigate to order page
                           context,
                           MaterialPageRoute(builder: (context) => OrderPage(tableNumber: tableNumEntry.text)),

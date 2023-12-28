@@ -6,8 +6,9 @@ class DBs {
   // Collection references
   final CollectionReference orderCollection = FirebaseFirestore.instance.collection('orders');
   final CollectionReference itemCollection = FirebaseFirestore.instance.collection('items');
+  final CollectionReference tableCollection = FirebaseFirestore.instance.collection('active_tables');
 
-  // Orders CRUD methods
+  // Orders CRUD methods:
 
   // Create order.
   Future addOrder(Orders order) async {
@@ -55,6 +56,28 @@ class DBs {
   // Delete item
   void deleteItem(Item item) {
     itemCollection.doc(item.code).delete();
+  }
+
+  // Tables CRUD methods:
+
+  // Creates an active Table.
+  Future addActiveTable(Tables table) async {
+    await tableCollection.doc(table.tableNumber).set(table.toJson());
+  }
+
+  // Checks if a table is active
+  Future<bool> isTableActive(Tables table) async {
+    QuerySnapshot querySnapshot = await tableCollection.get();
+    List<Tables> tables = querySnapshot.docs
+        .map((doc) => Tables.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+
+    return tables.any((existingTable) => existingTable.tableNumber == table.tableNumber);
+  }
+  
+  // Deletes active table
+  void deleteActiveTable(Tables table) {
+    tableCollection.doc(table.tableNumber).delete();
   }
 
 }

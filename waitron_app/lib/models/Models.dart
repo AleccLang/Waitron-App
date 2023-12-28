@@ -113,3 +113,25 @@ class Item {
   @override
   int get hashCode => code.hashCode;
 }
+
+// Represents a Table, used to keep track of which tables are currently in use
+class Tables {
+  String tableNumber;
+
+  // Constructor for Table class
+  Tables({required this.tableNumber});
+
+  // Creates a Table from JSON data
+  factory Tables.fromJson(Map<String, dynamic> json) {
+    return Tables(
+      tableNumber: json['tableNumber'],
+    );
+  }
+
+  // Converts a Table to a JSON representation
+  Map<String, dynamic> toJson() {
+    return {
+      'tableNumber': tableNumber,
+    };
+  }
+}
