@@ -37,6 +37,16 @@ class DBs {
     orderCollection.doc(order.id).delete();
   }
 
+  // Real-time listener for changes in the orders collection, called whenever there is an update to orders
+  void listenToOrders(void Function(List<Orders>) ords) {
+    orderCollection.snapshots().listen((QuerySnapshot<Object?> snapshot) {
+      List<Orders> orders = snapshot.docs
+          .map((doc) => Orders.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+      ords(orders);
+    });
+  }
+
   // Items CRUD methods:
 
   // Creates an item

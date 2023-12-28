@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/screens/OrderList.dart';
+import 'package:waitron_app/services/NotificationService.dart';
 import 'package:waitron_app/services/db.dart';
 
 // Page supports the creation of orders, as well as keeping track of all orders for a table
 class OrderPage extends StatefulWidget {
   final tableNumber;
-
   const OrderPage({super.key, required this.tableNumber});
-
   @override
   OrderPageState createState() => OrderPageState(tableNumber);
 }
 
 class OrderPageState extends State<OrderPage> {
-  final String tableNumber;
+  final String tableNumber; // Table number for the order
+  Set<String> processedOrderIds = Set<String>(); // Set of processed order ids
+  List<Request> orderRequests = []; // Requests to be added to an order
+  Item? selectedMenuItem; // Selected menu item in the drop down
   final TextEditingController notesEntry = TextEditingController();
   final TextEditingController quantityEntry = TextEditingController();
 
-  List<Request> orderRequests = [];
-  Item? selectedMenuItem;
-  
   OrderPageState(this.tableNumber);
 
   // Removes the active table from the DB when the page is left
@@ -31,19 +30,12 @@ class OrderPageState extends State<OrderPage> {
       super.dispose();
     }
 
-  // Inits the item list and sets the selected item to default to the first
+  // Listens for changes in orders to send notifications
   @override
   void initState() {
     super.initState();
-    DBs().getItemStream().first.then((QuerySnapshot snapshot) {
-      if (snapshot.docs.isNotEmpty) {
-        List<Item> items = snapshot.docs
-            .map((doc) => Item.fromJson(doc.data() as Map<String, dynamic>))
-            .toList();
-        setState(() {
-          selectedMenuItem = items.first; 
-        });
-      }
+    DBs().listenToOrders((List<Orders> orders) {
+      checkForNewPlacedOrder(orders);
     });
   }
 
@@ -86,6 +78,23 @@ class OrderPageState extends State<OrderPage> {
       ),
     );
   }
+
+    // Checks status of orders in the list to send out notifications
+    void checkForNewPlacedOrder(List<Orders> orders) {
+      for (Orders order in orders) {
+        if (order.status == 'Placed' && !processedOrderIds.contains(order.id) && order.table == tableNumber) {
+          NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
+          processedOrderIds.add(order.id);
+          break;
+        }
+        if (order.status == 'Rejected' && !processedOrderIds.contains(order.id) && order.table == tableNumber) {
+          NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
+          //DBs().deleteOrder(order);
+          processedOrderIds.add(order.id);
+          break;
+        }
+      }
+    }
 
   // Widget to create an order request for the table
   Widget createOrderTab(BuildContext context) {

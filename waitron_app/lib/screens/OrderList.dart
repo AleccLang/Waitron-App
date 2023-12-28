@@ -82,7 +82,6 @@ class OrderList extends StatelessWidget {
                 children: [
                   ElevatedButton( // Approve order
                     onPressed: () {
-                      NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
                     },
@@ -96,8 +95,7 @@ class OrderList extends StatelessWidget {
                   ),
                   ElevatedButton( // Reject order
                     onPressed: () {
-                      NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
-                      DBs().deleteOrder(order);
+                      DBs().updateOrderStatus(order.id, 'Rejected');
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
