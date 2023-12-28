@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waitron_app/models/Models.dart';
 
+// Class containing methods for interacting with Firestore collections
 class DBs {
 
   // Collection references
@@ -10,7 +11,7 @@ class DBs {
 
   // Orders CRUD methods:
 
-  // Create order.
+  // Create an order
   Future addOrder(Orders order) async {
     order.id = orderCollection.doc().id;
     await orderCollection.doc(order.id).set(order.toJson());
@@ -31,14 +32,14 @@ class DBs {
     return orderCollection.orderBy('time', descending: false).snapshots();
   }
   
-  // Delete an order
+  // Deletes an order
   void deleteOrder(Orders order) {
     orderCollection.doc(order.id).delete();
   }
 
   // Items CRUD methods:
 
-  // Create an item.
+  // Creates an item
   Future addItem(Item item) async {
     await itemCollection.doc(item.code).set(item.toJson());
   }
@@ -60,7 +61,7 @@ class DBs {
 
   // Tables CRUD methods:
 
-  // Creates an active Table.
+  // Creates an active Table
   Future addActiveTable(Tables table) async {
     await tableCollection.doc(table.tableNumber).set(table.toJson());
   }

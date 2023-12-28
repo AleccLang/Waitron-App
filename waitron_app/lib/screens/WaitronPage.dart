@@ -4,6 +4,7 @@ import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 import 'package:waitron_app/services/NotificationService.dart';
 
+// Page enables waitron to manage orders
 class WaitronPage extends StatelessWidget {
   const WaitronPage({super.key});
 
@@ -95,7 +96,7 @@ class OrderList extends StatelessWidget {
     );
   }
 
-  // Shows an order's details and controls the actions taken on an order in the list.
+  // Shows an order's details and controls the actions taken on an order in the list
   static void orderOptions(BuildContext context, Orders order, bool waitron) {
     showDialog(
       context: context,
@@ -126,7 +127,6 @@ class OrderList extends StatelessWidget {
                 children: [
                   ElevatedButton( // Approve order
                     onPressed: () {
-                      // Send notification
                       NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
@@ -141,7 +141,6 @@ class OrderList extends StatelessWidget {
                   ),
                   ElevatedButton( // Reject order
                     onPressed: () {
-                      // Send notification
                       NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
@@ -200,7 +199,6 @@ class OrderList extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Send notification
                       NotificationService().showNotification("Order Completed", "Order for table ${order.table} has been completed");
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
@@ -219,9 +217,8 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
+                  ElevatedButton( // Collect the order
                     onPressed: () {
-                      // Collect the order
                       DBs().updateOrderStatus(order.id, 'Collected');
                       Navigator.pop(context);
                     },
@@ -239,9 +236,8 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
+                  ElevatedButton( // Deliver the order
                     onPressed: () {
-                      // Deliver the order
                       DBs().updateOrderStatus(order.id, 'Delivered');
                       Navigator.pop(context);
                     },

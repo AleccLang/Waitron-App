@@ -1,8 +1,10 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+// Class for managing notifications
 class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin = FlutterLocalNotificationsPlugin();
 
+  // Initialises the notification service for Android
   Future<void> init() async {
     final AndroidInitializationSettings androidInitSettings = AndroidInitializationSettings('logo');
     var initializationSettings = InitializationSettings(android: androidInitSettings);

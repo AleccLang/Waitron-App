@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/screens/Staff.dart';
 import 'package:waitron_app/services/db.dart';
 import 'OrderPage.dart';
 
+// Home page for the App
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -43,7 +43,7 @@ class HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Expanded( // Textbox for Table Number entry.
+                  Expanded( // Textbox for Table Number entry
                     child: SizedBox(
                       child: TextField(
                         controller: tableNumEntry,

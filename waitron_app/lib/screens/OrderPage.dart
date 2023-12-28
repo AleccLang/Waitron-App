@@ -4,6 +4,7 @@ import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 import 'package:waitron_app/screens/WaitronPage.dart';
 
+// Page supports the creation of orders, as well as keeping track of all orders for a table
 class OrderPage extends StatefulWidget {
   final tableNumber;
 
@@ -23,7 +24,8 @@ class OrderPageState extends State<OrderPage> {
   
   OrderPageState(this.tableNumber);
 
-  @override // Removes active table from the DB when the page is left
+  // Removes the active table from the DB when the page is left
+  @override 
     void dispose() {
       DBs().deleteActiveTable(Tables(tableNumber: tableNumber));
       super.dispose();
@@ -44,6 +46,7 @@ class OrderPageState extends State<OrderPage> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -76,15 +79,15 @@ class OrderPageState extends State<OrderPage> {
         ),
         body: TabBarView(
           children: [
-            createOrderTab(context),
-            listOrdersTab(context),
+            createOrderTab(context), // Widget for creating an order request
+            listOrdersTab(context), // Widget for listing all orders for the table
           ],
         ),
       ),
     );
   }
 
-  // Tab to create an order request for the table
+  // Widget to create an order request for the table
   Widget createOrderTab(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(15.0),
@@ -138,18 +141,27 @@ class OrderPageState extends State<OrderPage> {
                 ),
                 ElevatedButton( // Sends order request
                   onPressed: () {
-                    DBs().addOrder(
-                      Orders(
-                        id: "",
-                        table: tableNumber,
-                        requests: orderRequests,
-                        status: 'Requested',
-                        time: Timestamp.now(),
-                      ),
-                    );
-                    setState(() {
-                      orderRequests = [];
-                    });
+                    if (orderRequests.isEmpty){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please add an item to the order.')
+                        ),
+                      );
+                    }
+                    else{
+                      DBs().addOrder(
+                        Orders(
+                          id: "",
+                          table: tableNumber,
+                          requests: orderRequests,
+                          status: 'Requested',
+                          time: Timestamp.now(),
+                        ),
+                      );
+                      setState(() {
+                        orderRequests = [];
+                      });
+                  }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 255, 255, 255),

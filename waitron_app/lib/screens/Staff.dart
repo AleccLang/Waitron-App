@@ -3,6 +3,7 @@ import 'package:waitron_app/screens/KitchenPage.dart';
 import 'package:waitron_app/screens/MenuPage.dart';
 import 'package:waitron_app/screens/WaitronPage.dart';
 
+// Controls navigation between the Waitron, Kitchen and Menu pages
 class Staff extends StatefulWidget {
   const Staff({super.key});
 
@@ -21,7 +22,6 @@ class StaffPageState extends State<Staff> {
     const BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "Menu",),
   ];
 
-  // Controls navigation between the Waitron, Kitchen and Menu pages
   @override
   Widget build(BuildContext context) => Scaffold(
     body: PageView(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:waitron_app/models/Models.dart';
 import 'package:waitron_app/services/db.dart';
 
+// Page controls the addition and modification of items in the menu
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
