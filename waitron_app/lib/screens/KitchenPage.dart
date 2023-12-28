@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:waitron_app/screens/WaitronPage.dart';
+import 'package:waitron_app/screens/OrderList.dart';
 
 // Page enables kitchen to manage orders
 class KitchenPage extends StatelessWidget {

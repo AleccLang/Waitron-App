@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:waitron_app/models/Models.dart';
+import 'package:waitron_app/screens/OrderList.dart';
 import 'package:waitron_app/services/db.dart';
-import 'package:waitron_app/screens/WaitronPage.dart';
 
 // Page supports the creation of orders, as well as keeping track of all orders for a table
 class OrderPage extends StatefulWidget {
@@ -366,10 +366,20 @@ class OrderPageState extends State<OrderPage> {
                       onTap: () {
                          OrderList.orderOptions(context, orders[index], false);
                       },
-                      child: ListTile(
-                        title: Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}',  style: const TextStyle(color: Colors.black)),
-                        subtitle: Text('   Status: ${orders[index].status}',  style: const TextStyle(color: Colors.black)),
-                      ),
+                      child:  ListTile(
+                      title: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}'),
+                            Text('   Status: ${orders[index].status}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                          ])
+                        ),
+                      )
                     );
                   },
                 );
