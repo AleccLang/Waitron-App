@@ -6,10 +6,11 @@ class Orders {
   String table;
   List<Request> requests;
   String status;
+  String notificationStatus;
   Timestamp time;
 
   // Constructor for Orders class
-  Orders({required this.id, required this.table,required this.requests,required this.status, required this.time});
+  Orders({required this.id, required this.table,required this.requests,required this.status, required this.time, required this.notificationStatus});
 
   // Creates an Orders object from JSON data
   factory Orders.fromJson(Map<String, dynamic> json) {
@@ -25,6 +26,7 @@ class Orders {
       }).toList(),
       status: json['status'],
       time: json['time'],
+      notificationStatus: json['notificationStatus']
     );
   }
 
@@ -39,8 +41,8 @@ class Orders {
         'quantity': request.quantity,
       }).toList(),
       'status': status,
-      'time' : time,
-      
+      'time': time,
+      'notificationStatus': notificationStatus
     };
   }
 }

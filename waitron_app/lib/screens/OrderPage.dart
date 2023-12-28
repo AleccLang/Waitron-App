@@ -15,7 +15,6 @@ class OrderPage extends StatefulWidget {
 
 class OrderPageState extends State<OrderPage> {
   final String tableNumber; // Table number for the order
-  Set<String> processedOrderIds = Set<String>(); // Set of processed order ids
   List<Request> orderRequests = []; // Requests to be added to an order
   Item? selectedMenuItem; // Selected menu item in the drop down
   final TextEditingController notesEntry = TextEditingController();
@@ -82,15 +81,15 @@ class OrderPageState extends State<OrderPage> {
     // Checks status of orders in the list to send out notifications
     void checkForNewPlacedOrder(List<Orders> orders) {
       for (Orders order in orders) {
-        if (order.status == 'Placed' && !processedOrderIds.contains(order.id) && order.table == tableNumber) {
+        if (order.status == 'Placed' && order.table == tableNumber && order.notificationStatus != "ApprovedNotification") {
           NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
-          processedOrderIds.add(order.id);
+          DBs().updateNotificationStatus(order.id, "ApprovedNotification");
           break;
         }
-        if (order.status == 'Rejected' && !processedOrderIds.contains(order.id) && order.table == tableNumber) {
+        if (order.status == 'Rejected' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
           NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
-          //DBs().deleteOrder(order);
-          processedOrderIds.add(order.id);
+          DBs().deleteOrder(order);
+          //DBs().updateNotificationStatus(order.id, "RejectedNotification");
           break;
         }
       }
@@ -165,6 +164,7 @@ class OrderPageState extends State<OrderPage> {
                           requests: orderRequests,
                           status: 'Requested',
                           time: Timestamp.now(),
+                          notificationStatus: "default"
                         ),
                       );
                       setState(() {

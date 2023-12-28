@@ -27,6 +27,11 @@ class DBs {
     orderCollection.doc(id).update({'status' : status});
   }
 
+  // Update an order's notification status
+  void updateNotificationStatus(String id, String notificationStatus) async{
+    orderCollection.doc(id).update({'notificationStatus' : notificationStatus});
+  }
+
   // Get all orders, ordered by the time they were placed
   Stream<QuerySnapshot> getOrderStream() {
     return orderCollection.orderBy('time', descending: false).snapshots();
