@@ -259,7 +259,7 @@ class OrderPageState extends State<OrderPage> {
                     items: items
                         .map((item) => DropdownMenuItem<Item>(
                           value: item,
-                          child: Text(item.description),
+                          child: Text('${item.description} - R${item.price}'),
                         )).toList(),
                     decoration: const InputDecoration(labelText: 'Select Item'),
                   );
@@ -278,7 +278,7 @@ class OrderPageState extends State<OrderPage> {
                   borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             TextField(
               controller: currentQuantity,
@@ -290,7 +290,7 @@ class OrderPageState extends State<OrderPage> {
                   borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 15.0),
             ElevatedButton( // Adds the updated item to the request
@@ -399,7 +399,7 @@ class OrderPageState extends State<OrderPage> {
                     items: items
                         .map((item) => DropdownMenuItem<Item>(
                           value: item,
-                          child: Text(item.description),
+                          child: Text('${item.description} - R${item.price}'),
                         )).toList(),
                     decoration: const InputDecoration(labelText: 'Select Item',
                       labelStyle: TextStyle(
@@ -426,7 +426,7 @@ class OrderPageState extends State<OrderPage> {
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
               ),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             TextField(
               controller: quantityEntry,
@@ -439,7 +439,7 @@ class OrderPageState extends State<OrderPage> {
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
               ),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 15.0),
             ElevatedButton( // Adds the item to the request

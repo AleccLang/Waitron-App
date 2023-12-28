@@ -109,7 +109,7 @@ class MenuPageState extends State<MenuPage> {
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black)),
               ),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             TextField(
               controller: itemDescriptionEntry,
@@ -121,7 +121,7 @@ class MenuPageState extends State<MenuPage> {
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
               ),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             TextField(
               controller: itemPriceEntry,
@@ -134,7 +134,7 @@ class MenuPageState extends State<MenuPage> {
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
               ),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 16.0),
             Row(
@@ -194,7 +194,7 @@ class MenuPageState extends State<MenuPage> {
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black))
               ),
-              cursorColor: const Color.fromARGB(255, 97, 166, 171)
+              cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 16.0),
             Wrap(

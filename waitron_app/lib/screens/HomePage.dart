@@ -38,7 +38,7 @@ class HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               Image.asset('lib/assets/logo.png', width: 300, height: 300),
               const SizedBox(height: 20),
               Row(
