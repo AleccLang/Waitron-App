@@ -18,8 +18,8 @@ class MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255,85,114,88),
-      appBar: AppBar(toolbarHeight: 9.0, backgroundColor: const Color.fromARGB(255,85,114,88)),
+      backgroundColor: const Color.fromARGB(255,97,166,171),
+      appBar: AppBar(toolbarHeight: 9.0, backgroundColor: const Color.fromARGB(255,97,166,171)),
       body: Padding(
         padding:  const EdgeInsets.all(15.0),
         child: Column(
@@ -76,7 +76,7 @@ class MenuPageState extends State<MenuPage> {
                 addItemOptions(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                 shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                 ),
@@ -157,7 +157,7 @@ class MenuPageState extends State<MenuPage> {
                     itemPriceEntry.clear();
                   },
                    style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                     shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)
                     ),
@@ -218,7 +218,7 @@ class MenuPageState extends State<MenuPage> {
                     }
                     },
                      style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),
@@ -237,7 +237,7 @@ class MenuPageState extends State<MenuPage> {
                     Navigator.pop(context);
                   },
                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),
@@ -249,7 +249,7 @@ class MenuPageState extends State<MenuPage> {
                     Navigator.pop(context);
                   },
                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),

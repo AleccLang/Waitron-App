@@ -10,9 +10,9 @@ class KitchenPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255,85,114,88),
+        backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 246, 246, 233),
           toolbarHeight: 9.0,
           bottom: const TabBar(
             tabs: [
@@ -29,9 +29,9 @@ class KitchenPage extends StatelessWidget {
                 ),
               ),
             ],
-            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 255, 239, 216)),
-            indicatorColor: Color.fromARGB(255,255,187,85),
-            labelColor: Color.fromARGB(255,255,187,85),
+            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 217, 241, 242)),
+            indicatorColor: Color.fromARGB(255, 97, 166, 171),
+            labelColor: Color.fromARGB(255, 97, 166, 171),
             unselectedLabelColor: Colors.black
           ),
         ),

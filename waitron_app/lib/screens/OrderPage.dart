@@ -49,7 +49,7 @@ class OrderPageState extends State<OrderPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255,85,114,88),
+        backgroundColor: const Color.fromARGB(255,97,166,171),
         appBar: AppBar(
           toolbarHeight: 9.0,
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -68,9 +68,9 @@ class OrderPageState extends State<OrderPage> {
                 ),
               )
             ],
-            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 255, 239, 216)),
-            indicatorColor: Color.fromARGB(255,255,187,85),
-            labelColor: Color.fromARGB(255,255,187,85),
+            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 217, 241, 242)),
+            indicatorColor: Color.fromARGB(255, 97, 166, 171),
+            labelColor: Color.fromARGB(255, 97, 166, 171),
             unselectedLabelColor: Colors.black
           ),
         ),
@@ -104,6 +104,7 @@ class OrderPageState extends State<OrderPage> {
                       itemOptions(context, index);
                     },
                     child: ListTile(
+<<<<<<< HEAD
                       title: Container(
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 255, 255, 255),
@@ -119,6 +120,14 @@ class OrderPageState extends State<OrderPage> {
                       )
                     );
                   },
+=======
+                        title: Text(orderRequests[index].item),
+                        subtitle: Text(
+                            'Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}'),
+                    ),
+                  );
+                },
+>>>>>>> parent of 9fdcd30 (Altered colour scheme of app)
               ),
             ),
             Row(
@@ -129,7 +138,7 @@ class OrderPageState extends State<OrderPage> {
                     addItemToOrder(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                     )
@@ -152,7 +161,7 @@ class OrderPageState extends State<OrderPage> {
                     });
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                     )
@@ -185,7 +194,7 @@ class OrderPageState extends State<OrderPage> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                   shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                   )
@@ -198,7 +207,7 @@ class OrderPageState extends State<OrderPage> {
                   updateItem(context, index);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                   shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                   )
@@ -210,7 +219,7 @@ class OrderPageState extends State<OrderPage> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                   shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                   )
@@ -309,7 +318,7 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                 shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                 ),
@@ -355,8 +364,8 @@ class OrderPageState extends State<OrderPage> {
                          OrderList.orderOptions(context, orders[index], false);
                       },
                       child: ListTile(
-                        title: Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}',  style: const TextStyle(color: Colors.black)),
-                        subtitle: Text('   Status: ${orders[index].status}',  style: const TextStyle(color: Colors.black)),
+                        title: Text('Table: ${orders[index].table}',  style: const TextStyle(color: Colors.black)),
+                        subtitle: Text('Status: ${orders[index].status}',  style: const TextStyle(color: Colors.black)),
                       ),
                     );
                   },
@@ -457,7 +466,7 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
                 shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                 ),
