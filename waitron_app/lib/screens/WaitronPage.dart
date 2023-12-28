@@ -12,9 +12,9 @@ class WaitronPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255,97,166,171),
+        backgroundColor: const Color.fromARGB(255,85,114,88),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           toolbarHeight: 9.0,
           bottom: const TabBar(
             tabs: [
@@ -31,9 +31,9 @@ class WaitronPage extends StatelessWidget {
                 ),
               ),
             ],
-            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 217, 241, 242)),
-            indicatorColor: Color.fromARGB(255, 97, 166, 171),
-            labelColor: Color.fromARGB(255, 97, 166, 171),
+            overlayColor: MaterialStatePropertyAll(Color.fromARGB(255, 255, 239, 216)),
+            indicatorColor: Color.fromARGB(255,255,187,85),
+            labelColor: Color.fromARGB(255,255,187,85),
             unselectedLabelColor: Colors.black
           ),
         ),
@@ -122,7 +122,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),
@@ -137,7 +137,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),
@@ -156,7 +156,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                 shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                 ),
@@ -175,7 +175,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                 shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                 ),
@@ -196,7 +196,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),
@@ -216,7 +216,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),
@@ -236,7 +236,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                      style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0)
                       ),

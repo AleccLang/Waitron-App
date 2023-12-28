@@ -15,12 +15,12 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255,97,166,171),
+        backgroundColor: const Color.fromARGB(255,85,114,88),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255,97,166,171),
+          backgroundColor: const Color.fromARGB(255,85,114,88),
           actions: [
             IconButton( // Route to the staff pages
-              icon: const Icon(Icons.admin_panel_settings_rounded, size: 30, color: Color.fromARGB(255, 246, 246, 233),),
+              icon: const Icon(Icons.admin_panel_settings_rounded, size: 30, color: Color.fromARGB(255, 255, 255, 255),),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -49,13 +49,13 @@ class HomePageState extends State<HomePage> {
                             labelStyle: TextStyle(
                               color: Colors.black), 
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 246, 246, 233))),
+                              borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 246, 246, 233)))
+                              borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)))
                           ),
                         keyboardType: TextInputType.number,
                         style: const TextStyle(color: Colors.black),
-                        cursorColor: const Color.fromARGB(255, 246, 246, 233)
+                        cursorColor: const Color.fromARGB(255, 255, 255, 255)
                       ),
                     ),  
                   ),
@@ -77,7 +77,7 @@ class HomePageState extends State<HomePage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 246, 246, 233),
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                       ),

@@ -16,9 +16,9 @@ class StaffPageState extends State<Staff> {
   PageController pageController = PageController(initialPage: 0);
 
   final navigationBarItems = [ 
-    const BottomNavigationBarItem(icon: Icon(Icons.person, color: Color.fromARGB(255,97,166,171)), label: "Waitron",),
-    const BottomNavigationBarItem(icon: Icon(Icons.kitchen, color: Color.fromARGB(255,97,166,171)), label: "Kitchen",),
-    const BottomNavigationBarItem(icon: Icon(Icons.menu_book, color: Color.fromARGB(255,97,166,171)), label: "Menu",),
+    const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Waitron",),
+    const BottomNavigationBarItem(icon: Icon(Icons.kitchen), label: "Kitchen",),
+    const BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "Menu",),
   ];
 
   // Controls navigation between the Waitron, Kitchen and Menu pages
@@ -39,15 +39,15 @@ class StaffPageState extends State<Staff> {
     ),
     bottomNavigationBar: Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 246, 246, 233),
+        color: const Color.fromARGB(255, 255, 255, 255),
         border: Border(
           top: BorderSide(color: Colors.black.withOpacity(0.1), width: 1.0),
         ),
       ),
       child: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 246, 246, 233),
-        selectedItemColor: const Color.fromARGB(255,97,166,171),
-        unselectedItemColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        selectedItemColor: const Color.fromARGB(255,255,187,85),
+        unselectedItemColor: const Color.fromARGB(255,85,114,88),
         currentIndex: currentIndex,
         elevation: 4,
         onTap: (index){
