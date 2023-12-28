@@ -49,9 +49,19 @@ class MenuPageState extends State<MenuPage> {
                           },
                         // Display each item in the list
                         child: ListTile(
-                          title: Text('${String.fromCharCode(0x2022)} ${items[index].description} - R${items[index].price}', style: const TextStyle(color: Colors.black)),
-                          subtitle: Text('   Item code - ${items[index].code}', style: const TextStyle(color: Colors.black)),
-                        ),
+                          title: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${String.fromCharCode(0x2022)} ${items[index].description} - R${items[index].price}', style: const TextStyle(color: Colors.black)),
+                                Text('   Item code - ${items[index].code}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                              ])
+                            ),
+                          )
                         );
                       },
                     );
@@ -85,7 +95,7 @@ class MenuPageState extends State<MenuPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255,246,246,233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Text('Update Item Price'),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -169,7 +179,7 @@ class MenuPageState extends State<MenuPage> {
     context: context,
     builder: (context) {
       return AlertDialog(
-        backgroundColor: const Color.fromARGB(255,246,246,233),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text('Update Item'),
         content: Column( mainAxisSize: MainAxisSize.min,
           children: [

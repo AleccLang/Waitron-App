@@ -46,7 +46,7 @@ class OrderPageState extends State<OrderPage> {
         backgroundColor: const Color.fromARGB(255,85,114,88),
         appBar: AppBar(
           toolbarHeight: 9.0,
-          backgroundColor: const Color.fromARGB(255,246,246,233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           bottom: const TabBar(
             tabs: [
               Tab(
@@ -98,12 +98,21 @@ class OrderPageState extends State<OrderPage> {
                       itemOptions(context, index);
                     },
                     child: ListTile(
-                        title: Text('${String.fromCharCode(0x2022)} ${orderRequests[index].item}'),
-                        subtitle: Text(
-                            '   Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}', style: TextStyle(color: Colors.black),),
-                    ),
-                  );
-                },
+                      title: Container(
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${String.fromCharCode(0x2022)} ${orderRequests[index].item}'),
+                            Text('   Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                          ])
+                        ),
+                      )
+                    );
+                  },
               ),
             ),
             Row(
@@ -157,7 +166,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255,246,246,233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Text('Item Options',  style: TextStyle(color: Colors.black)),
           content: Wrap(
             alignment: WrapAlignment.spaceEvenly,
@@ -219,7 +228,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255,246,246,233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Text('Update Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -360,7 +369,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255,246,246,233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           title: const Text('Add Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -374,7 +383,7 @@ class OrderPageState extends State<OrderPage> {
                     .toList();
 
                   return DropdownButtonFormField<Item>(
-                    dropdownColor: const Color.fromARGB(255,246,246,233),
+                    dropdownColor: const Color.fromARGB(255, 255, 255, 255),
                     value: selectedMenuItem = items.first,
                     onChanged: (value) {
                       setState(() {

@@ -75,10 +75,20 @@ class OrderList extends StatelessWidget {
                   orderOptions(context, orders[index], true);
               },
               child: ListTile(
-                title: Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}', style: const TextStyle(color: Colors.black)),
-                subtitle: Text('   Status: ${orders[index].status}', style: const TextStyle(color: Colors.black)),
-              ),
-            );
+                title: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}'),
+                      Text('   Status: ${orders[index].status}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                    ])
+                  ),
+                )
+              );
           },
         );
       },
@@ -91,7 +101,7 @@ class OrderList extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255,246,246,233),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           content: Column( mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
           children: [
