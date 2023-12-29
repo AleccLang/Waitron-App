@@ -13,11 +13,20 @@ class WaitronPage extends StatefulWidget  {
 }
 
 class WaitronPageState extends State<WaitronPage> {
+  late bool waitronPage; // Keeps track of if the waitron page is being viewed, uses this to ensure notifaction doesnt trigger when viewing other tabs in StaffPage()
+
+  // Sets waitronPage to false when the page is being left
+  @override 
+  void dispose() {
+    waitronPage = false;
+    super.dispose();
+  }
   
   // Listens for changes in orders to send notifications
   @override
   void initState() {
     super.initState();
+    waitronPage = true;
     DBs().listenToOrders((List<Orders> orders) {
       checkForNewPlacedOrder(orders);
     });
@@ -66,7 +75,7 @@ class WaitronPageState extends State<WaitronPage> {
   // Checks status of orders in the list to send out notifications
   void checkForNewPlacedOrder(List<Orders> orders) {
     for (Orders order in orders) {
-      if (order.status == 'Completed'  && order.notificationStatus != "CompletedNotification") {
+      if (order.status == 'Completed'  && order.notificationStatus != "CompletedNotification" && waitronPage == true) {
         NotificationService().showNotification("Order Completed", "Order for table ${order.table} has been completed.");
         DBs().updateNotificationStatus(order.id, "CompletedNotification");
         break;

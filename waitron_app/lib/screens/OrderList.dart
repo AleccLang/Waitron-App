@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:waitron_app/models/Models.dart';
-import 'package:waitron_app/services/NotificationService.dart';
 import 'package:waitron_app/services/db.dart';
 
 // Builds and outputs a list of Orders depending on their status
@@ -152,7 +151,6 @@ class OrderList extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      NotificationService().showNotification("Order Completed", "Order for table ${order.table} has been completed");
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
                     },

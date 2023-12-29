@@ -24,11 +24,11 @@ class OrderPageState extends State<OrderPage> {
 
   // Removes the active table from the DB when the page is left
   @override 
-    void dispose() {
-      DBs().deleteActiveTable(Tables(tableNumber: tableNumber));
-      tableNumber = "";
-      super.dispose();
-    }
+  void dispose() {
+    DBs().deleteActiveTable(Tables(tableNumber: tableNumber));
+    tableNumber = "";
+    super.dispose();
+  }
 
   // Listens for changes in orders to send notifications
   @override
@@ -79,21 +79,21 @@ class OrderPageState extends State<OrderPage> {
     );
   }
 
-    // Checks status of orders in the list to send out notifications
-    void checkForNewPlacedOrder(List<Orders> orders) {
-      for (Orders order in orders) {
-        if (order.status == 'Placed' && order.table == tableNumber && order.notificationStatus != "ApprovedNotification") {
-          NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
-          DBs().updateNotificationStatus(order.id, "ApprovedNotification");
-          break;
-        }
-        if (order.status == 'Rejected' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
-          NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
-          DBs().deleteOrder(order);
-          break;
-        }
+  // Checks status of orders in the list to send out notifications
+  void checkForNewPlacedOrder(List<Orders> orders) {
+    for (Orders order in orders) {
+      if (order.status == 'Placed' && order.table == tableNumber && order.notificationStatus != "ApprovedNotification") {
+        NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
+        DBs().updateNotificationStatus(order.id, "ApprovedNotification");
+        break;
+      }
+      if (order.status == 'Rejected' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
+        NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
+        DBs().deleteOrder(order);
+        break;
       }
     }
+  }
 
   // Widget to create an order request for the table
   Widget createOrderTab(BuildContext context) {
