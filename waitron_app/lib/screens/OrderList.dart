@@ -50,27 +50,71 @@ class OrderList extends StatelessWidget {
     );
   }
 
+
+
+
   // Shows an order's details and controls the actions taken on an order in the list
   static void orderOptions(BuildContext context, Orders order, bool waitron) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 125, 164, 129),
           content: Column( mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Table: ${order.table}', style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
-            const SizedBox(height: 8.0),
-            Text('Status: ${order.status}', style: const TextStyle(fontSize: 16.0, color: Colors.black)),
+            if(order.status == 'Requested')
+              const Text('Order Request', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            if(order.status == 'Placed')
+              const Text('Begin Order', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            if(order.status == 'In Progress')
+              const Text('Finish Order', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            if(order.status == 'Completed' && waitron == true)
+              const Text('Deliver Order', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            if(order.status == 'Completed' && waitron == false)
+              const Text('Collect Order', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            if(order.status == 'Collected')
+              const Text('Order', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            if(order.status == 'Delivered')
+              const Text('Order', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black)),
             const SizedBox(height: 15.0),
-            const Text('Items:', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black)),
+            RichText(
+              text: TextSpan(
+                children: [
+                  const TextSpan(text: 'Table:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,color: Colors.black)),
+                  TextSpan(text: '   ${order.table}',style: const TextStyle(fontSize: 16.0,color: Colors.black)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 5.0),
+            RichText(
+              text: TextSpan(
+                children: [
+                  const TextSpan(text: 'Status:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,color: Colors.black)),
+                  TextSpan(text: ' ${order.status}',style: const TextStyle(fontSize: 16.0,color: Colors.black)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 5.0),
+            RichText(
+              text: const TextSpan(
+                children: [
+                  TextSpan(text: 'Items:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,color: Colors.black))
+                ],
+              ),
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: order.requests.map((request) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 15.0),
-                  child: Text('${request.quantity} x ${request.item} (${request.notes})', style: const TextStyle(color: Colors.black))
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(text: '          ${request.quantity} x ${request.item} (${request.notes})', style: const TextStyle(fontSize: 16.0,color: Colors.black))
+                      ],
+                    ),
+                  ),
                 );
               }).toList(),
             ),
@@ -79,31 +123,21 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Approve order
+                  IconButton( // Approve order
                     onPressed: () {
                       DBs().updateOrderStatus(order.id, 'Placed');
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                    ),
-                    child: const Text('Approve', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
-                  ElevatedButton( // Reject order
+                  IconButton( // Reject order
                     onPressed: () {
                       DBs().updateOrderStatus(order.id, 'Rejected');
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                    ),
-                    child: const Text('Reject', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.cancel, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -111,18 +145,13 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Customer cancels order
+                  IconButton( // Customer cancels order
                     onPressed: () {
                       DBs().deleteOrder(order);
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                ),
-                    ),
-                    child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.delete, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -130,18 +159,13 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Start work on the order
+                  IconButton( // Start work on the order
                     onPressed: () {
                       DBs().updateOrderStatus(order.id, 'In Progress');
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                ),
-                    ),
-                    child: const Text('Begin Order', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -149,18 +173,13 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
+                  IconButton(
                     onPressed: () {
                       DBs().updateOrderStatus(order.id, 'Completed');
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                    ),
-                    child: const Text('Finish Order', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -168,18 +187,13 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Collect the order
+                  IconButton( // Collect the order
                     onPressed: () {
                       DBs().updateOrderStatus(order.id, 'Collected');
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                    ),
-                    child: const Text('Collect Order', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -187,18 +201,13 @@ class OrderList extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton( // Deliver the order
+                  IconButton( // Deliver the order
                     onPressed: () {
                       DBs().updateOrderStatus(order.id, 'Delivered');
                       Navigator.pop(context);
                     },
-                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                    ),
-                    child: const Text('Deliver Order', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),

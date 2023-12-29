@@ -13,7 +13,7 @@ class KitchenPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255,85,114,88),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-          toolbarHeight: 9.0,
+          toolbarHeight: 30.0,
           bottom: const TabBar(
             tabs: [
               Tab(

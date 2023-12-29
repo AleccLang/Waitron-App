@@ -20,7 +20,7 @@ class MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255,85,114,88),
-      appBar: AppBar(toolbarHeight: 9.0, backgroundColor: const Color.fromARGB(255,85,114,88)),
+      appBar: AppBar(toolbarHeight: 30.0, backgroundColor: const Color.fromARGB(255,85,114,88)),
       body: Padding(
         padding:  const EdgeInsets.all(15.0),
         child: Column(
@@ -72,17 +72,12 @@ class MenuPageState extends State<MenuPage> {
                 },
               ),
             ),
-            ElevatedButton( // Adds item to menu
+            IconButton( // Adds item to menu
+              alignment: AlignmentDirectional.bottomEnd,
+              icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
               onPressed: () {
                 addItemOptions(context);
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                ),
-              ),
-              child: const Text('Add item', style: TextStyle(color: Colors.black)),
             ),
           ],
         ),
@@ -96,7 +91,7 @@ class MenuPageState extends State<MenuPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 125, 164, 129),
           title: const Text('Update Item Price'),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -138,43 +133,33 @@ class MenuPageState extends State<MenuPage> {
               cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton( // Add an item to the menu
-                  onPressed: () {
-                    if (itemCodeEntry.text.isEmpty || itemDescriptionEntry.text.isEmpty || itemPriceEntry.text.isEmpty){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please complete all fields')
-                        ),
-                      );
-                    }
-                    else {
-                      DBs().addItem(
-                        Item(
-                          code: itemCodeEntry.text,
-                          description: itemDescriptionEntry.text,
-                          price: int.tryParse(itemPriceEntry.text) ?? 0,
-                        ),
-                      );
-                      setState(() {
-                        Navigator.pop(context);
-                      });
-                      itemCodeEntry.clear();
-                      itemDescriptionEntry.clear();
-                      itemPriceEntry.clear();
-                    }
-                  },
-                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                    shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)
+            IconButton( // Add an item to the menu
+              onPressed: () {
+                if (itemCodeEntry.text.isEmpty || itemDescriptionEntry.text.isEmpty || itemPriceEntry.text.isEmpty){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Please complete all fields')
                     ),
-                  ),
-                  child: const Text('Add Item', style: TextStyle(color: Colors.black)),
-                ),
-              ],
+                  );
+                }
+                else {
+                  DBs().addItem(
+                    Item(
+                      code: itemCodeEntry.text,
+                      description: itemDescriptionEntry.text,
+                      price: int.tryParse(itemPriceEntry.text) ?? 0,
+                    ),
+                  );
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                  itemCodeEntry.clear();
+                  itemDescriptionEntry.clear();
+                  itemPriceEntry.clear();
+                }
+              },
+              alignment: AlignmentDirectional.bottomEnd,
+              icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
             ),
           ],
         ),
@@ -189,7 +174,7 @@ class MenuPageState extends State<MenuPage> {
     context: context,
     builder: (context) {
       return AlertDialog(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 125, 164, 129),
         title: const Text('Update Item'),
         content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -210,7 +195,7 @@ class MenuPageState extends State<MenuPage> {
             Wrap(
               alignment: WrapAlignment.spaceEvenly,
               children: [
-                ElevatedButton( // Update an item's price
+                IconButton( // Update an item's price
                   onPressed: (){
                     if (itemPriceEntry.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -227,15 +212,10 @@ class MenuPageState extends State<MenuPage> {
                       Navigator.pop(context);
                     }
                     },
-                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                    ),
-                    child: const Text('Update price', style: TextStyle(color: Colors.black)),
+                    alignment: AlignmentDirectional.bottomEnd,
+                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
                   ),
-                ElevatedButton( // Delete an item from the menu
+                IconButton( // Delete an item from the menu
                   onPressed: () {
                     DBs().deleteItem(
                       Item(
@@ -246,25 +226,15 @@ class MenuPageState extends State<MenuPage> {
                     );
                     Navigator.pop(context);
                   },
-                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                  ),
-                  child: const Text('Delete Item', style: TextStyle(color: Colors.black)),
+                  alignment: AlignmentDirectional.bottomEnd,
+                  icon: const Icon(Icons.delete, size: 35, color: Color.fromARGB(255,255,187,85)),
                 ),
-                ElevatedButton(
+                IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)
-                      ),
-                  ),
-                  child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+                  alignment: AlignmentDirectional.bottomEnd,
+                  icon: const Icon(Icons.cancel, size: 35, color: Color.fromARGB(255,255,187,85)),
                 ),
               ],
             ),

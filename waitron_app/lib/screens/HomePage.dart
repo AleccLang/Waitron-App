@@ -23,7 +23,7 @@ class HomePageState extends State<HomePage> {
           backgroundColor: const Color.fromARGB(255,85,114,88),
           actions: [
             IconButton( // Route to the staff pages
-              icon: const Icon(Icons.admin_panel_settings_rounded, size: 30, color: Color.fromARGB(255, 255, 255, 255),),
+              icon: const Icon(Icons.admin_panel_settings_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -90,7 +90,7 @@ class HomePageState extends State<HomePage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: const Color.fromARGB(255,255,187,85),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)
                       ),

@@ -46,7 +46,7 @@ class OrderPageState extends State<OrderPage> {
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255,85,114,88),
         appBar: AppBar(
-          toolbarHeight: 9.0,
+          toolbarHeight: 30.0,
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           bottom: const TabBar(
             tabs: [
@@ -133,21 +133,17 @@ class OrderPageState extends State<OrderPage> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton( // Adds an item to current order
+                IconButton( // Adds an item to current order
+                  alignment: AlignmentDirectional.bottomEnd,
+                  icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
                   onPressed: () {
                     addItemToOrder(context);
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                    )
-                  ),
-                  child: const Text('Add to Order',  style: TextStyle(color: Colors.black)),
                 ),
-                ElevatedButton( // Sends order request
+                const SizedBox(width: 16),
+                IconButton( // Sends order request
                   onPressed: () {
                     if (orderRequests.isEmpty){
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -172,13 +168,7 @@ class OrderPageState extends State<OrderPage> {
                       });
                   }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                    )
-                  ),
-                  child: const Text('Request Order',  style: TextStyle(color: Colors.black)),
+                  icon: const Icon(Icons.arrow_circle_right, size: 35, color: Color.fromARGB(255,255,187,85)),
                 ),
               ],
             ),
@@ -193,50 +183,41 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 125, 164, 129),
           title: const Text('Item Options',  style: TextStyle(color: Colors.black)),
           content: Wrap(
             alignment: WrapAlignment.spaceEvenly,
             children: [
-              ElevatedButton( // Remove the item
-                onPressed: () {
-                  setState(() {
-                    orderRequests.removeAt(index);
-                  });
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                  shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                  )
-                ),
-                child: const Text('Remove',  style: TextStyle(color: Colors.black)),
-              ),
               ElevatedButton( // Update the item
                 onPressed: () {
                   Navigator.pop(context);
                   updateItem(context, index);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  minimumSize: const Size(30, 28),
+                  backgroundColor: const Color.fromARGB(255,255,187,85),
                   shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                  )
+                  borderRadius: BorderRadius.circular(10.0)
+                  ),
                 ),
-                child: const Text('Update',  style: TextStyle(color: Colors.black)),
+                child: const Text('Update', style: TextStyle(color: Colors.black)),
               ),
-              ElevatedButton( // Cancel
+              IconButton( // Remove the item
+                onPressed: () {
+                  setState(() {
+                    orderRequests.removeAt(index);
+                  });
+                  Navigator.pop(context);
+                },
+                alignment: AlignmentDirectional.bottomEnd,
+                icon: const Icon(Icons.delete, size: 35, color: Color.fromARGB(255,255,187,85)),
+              ),
+              IconButton( // Cancel
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                  shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                  )
-                ),
-                child: const Text('Cancel',  style: TextStyle(color: Colors.black)),
+                alignment: AlignmentDirectional.bottomEnd,
+                icon: const Icon(Icons.cancel, size: 35, color: Color.fromARGB(255,255,187,85)),
               ),
             ],
           ),
@@ -255,7 +236,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 125, 164, 129),
           title: const Text('Update Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -314,7 +295,7 @@ class OrderPageState extends State<OrderPage> {
               cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 15.0),
-            ElevatedButton( // Adds the updated item to the request
+            IconButton( // Adds the updated item to the request
               onPressed: () {
                 setState(() {
                   orderRequests.removeAt(index);
@@ -329,13 +310,8 @@ class OrderPageState extends State<OrderPage> {
                   selectedMenuItem = null;
                 });
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                ),
-              ),
-              child: const Text('Update item',  style: TextStyle(color: Colors.black)),
+              alignment: AlignmentDirectional.bottomEnd,
+              icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
             ),
           ],
         ),
@@ -406,7 +382,7 @@ class OrderPageState extends State<OrderPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: const Color.fromARGB(255, 125, 164, 129),
           title: const Text('Add Item',  style: TextStyle(color: Colors.black)),
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
@@ -473,7 +449,7 @@ class OrderPageState extends State<OrderPage> {
               cursorColor: const Color.fromARGB(255,255,187,85)
             ),
             const SizedBox(height: 15.0),
-            ElevatedButton( // Adds the item to the request
+            IconButton( // Adds the item to the request
               onPressed: () {
                 setState(() {
                   orderRequests.add(Request(
@@ -487,13 +463,8 @@ class OrderPageState extends State<OrderPage> {
                   selectedMenuItem = null;
                 });
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)
-                ),
-              ),
-              child: const Text('Add to Order', style: TextStyle(color: Colors.black)),
+              alignment: Alignment.bottomRight,
+              icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
             ),
           ],
         ),
