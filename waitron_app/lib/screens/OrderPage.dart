@@ -14,7 +14,7 @@ class OrderPage extends StatefulWidget {
 }
 
 class OrderPageState extends State<OrderPage> {
-  final String tableNumber; // Table number for the order
+  String tableNumber; // Table number for the order
   List<Request> orderRequests = []; // Requests to be added to an order
   Item? selectedMenuItem; // Selected menu item in the drop down
   final TextEditingController notesEntry = TextEditingController();
@@ -26,6 +26,7 @@ class OrderPageState extends State<OrderPage> {
   @override 
     void dispose() {
       DBs().deleteActiveTable(Tables(tableNumber: tableNumber));
+      tableNumber = "";
       super.dispose();
     }
 
@@ -89,7 +90,6 @@ class OrderPageState extends State<OrderPage> {
         if (order.status == 'Rejected' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
           NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
           DBs().deleteOrder(order);
-          //DBs().updateNotificationStatus(order.id, "RejectedNotification");
           break;
         }
       }

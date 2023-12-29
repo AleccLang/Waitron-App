@@ -143,19 +143,28 @@ class MenuPageState extends State<MenuPage> {
               children: [
                 ElevatedButton( // Add an item to the menu
                   onPressed: () {
-                    DBs().addItem(
-                      Item(
-                        code: itemCodeEntry.text,
-                        description: itemDescriptionEntry.text,
-                        price: int.tryParse(itemPriceEntry.text) ?? 0,
-                      ),
-                    );
-                    setState(() {
-                      Navigator.pop(context);
-                    });
-                    itemCodeEntry.clear();
-                    itemDescriptionEntry.clear();
-                    itemPriceEntry.clear();
+                    if (itemCodeEntry.text.isEmpty || itemDescriptionEntry.text.isEmpty || itemPriceEntry.text.isEmpty){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please complete all fields')
+                        ),
+                      );
+                    }
+                    else {
+                      DBs().addItem(
+                        Item(
+                          code: itemCodeEntry.text,
+                          description: itemDescriptionEntry.text,
+                          price: int.tryParse(itemPriceEntry.text) ?? 0,
+                        ),
+                      );
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                      itemCodeEntry.clear();
+                      itemDescriptionEntry.clear();
+                      itemPriceEntry.clear();
+                    }
                   },
                    style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 255, 255, 255),

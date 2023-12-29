@@ -12,7 +12,7 @@ class DBs {
   // Orders CRUD methods:
 
   // Create an order
-  Future addOrder(Orders order) async {
+  void addOrder(Orders order) async {
     order.id = orderCollection.doc().id;
     await orderCollection.doc(order.id).set(order.toJson());
   }
@@ -55,7 +55,7 @@ class DBs {
   // Items CRUD methods:
 
   // Creates an item
-  Future addItem(Item item) async {
+  void addItem(Item item) async {
     await itemCollection.doc(item.code).set(item.toJson());
   }
 
@@ -77,7 +77,7 @@ class DBs {
   // Tables CRUD methods:
 
   // Creates an active Table
-  Future addActiveTable(Tables table) async {
+  void addActiveTable(Tables table) async {
     await tableCollection.doc(table.tableNumber).set(table.toJson());
   }
 

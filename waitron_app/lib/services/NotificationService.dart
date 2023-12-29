@@ -6,8 +6,8 @@ class NotificationService {
 
   // Initialises the notification service for Android
   Future<void> init() async {
-    final AndroidInitializationSettings androidInitSettings = AndroidInitializationSettings('logo');
-    var initializationSettings = InitializationSettings(android: androidInitSettings);
+    const AndroidInitializationSettings androidInitSettings = AndroidInitializationSettings('logo');
+    var initializationSettings = const InitializationSettings(android: androidInitSettings);
     await notificationsPlugin.initialize(initializationSettings);
   }
 

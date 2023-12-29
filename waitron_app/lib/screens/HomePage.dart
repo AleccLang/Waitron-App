@@ -65,7 +65,6 @@ class HomePageState extends State<HomePage> {
                   const SizedBox(width: 15.0),
                   ElevatedButton( // Button to go to OrderPage
                     onPressed: () async {
-                      print(tableNumEntry.text);
                       bool active = await DBs().isTableActive(Tables(tableNumber: tableNumEntry.text));
                       if (active){ // Error msg to notify the table is already in use
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -81,7 +80,7 @@ class HomePageState extends State<HomePage> {
                           ),
                         );
                       }
-                      if (!active){
+                      if (!active && !tableNumEntry.text.isEmpty){
                         DBs().addActiveTable(Tables(tableNumber: tableNumEntry.text));
                         Navigator.push( // Navigate to order page
                           context,
