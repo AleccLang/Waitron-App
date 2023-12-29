@@ -29,38 +29,44 @@ class OrderList extends StatelessWidget {
               onTap: () {
                   orderOptions(context, orders[index], true);
               },
-              child: ListTile(
-                title: Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Card(
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: ListTile(
+                  title: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('  Table: ${orders[index].table}'),
-                        Text('  Status: ${orders[index].status}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
-                        ]
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
-                          SizedBox(width: 10)
-                        ]
-                      )
-                    ])
-                  ),
+                          Text('  Table: ${orders[index].table}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+                          Text('  Status: ${orders[index].status}', style: const TextStyle(color: Color.fromARGB(255, 97, 96, 96), fontSize: 14.0))
+                          ]
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                            SizedBox(width: 10)
+                          ]
+                        )
+                      ])
+                    ),
+                  )
                 )
               );
-          },
-        );
-      },
-    );
-  }
+            },
+          );
+        },
+      );
+    }
 
   // Shows an order's details and controls the actions taken on an order in the list
   static void orderOptions(BuildContext context, Orders order, bool waitron) {

@@ -25,12 +25,20 @@ class MenuPageState extends State<MenuPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Menu:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 125, 164, 129),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.0),
+                  topRight: Radius.circular(15.0),
+                ),
+              ),
+              child: const Center(
+                child: Text('Menu:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),),
+              ),
             ),
-            // Items on the menu
-            Expanded(
+            Expanded( // Items on the menu
               child: StreamBuilder(
                 stream: DBs().getItemStream(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -47,31 +55,36 @@ class MenuPageState extends State<MenuPage> {
                               // Upodates item price / delete item from menu
                               itemOptions(context, items[index]);
                           },
-                        // Display each item in the list
-                        child: ListTile(
-                          title: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${items[index].description}',
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                                Text(
-                                  'R${items[index].price}',
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                              ],
-                            ),
+                        child: Card(
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
+                          child: ListTile( // Display each item in the list
+                            title: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    items[index].description,
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),
+                                  ),
+                                  Text(
+                                    'R${items[index].price}',
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
                           )
-                        );
-                      },
+                        )
+                      );
+                    },
                     );
                   } else {
                     return const CircularProgressIndicator();

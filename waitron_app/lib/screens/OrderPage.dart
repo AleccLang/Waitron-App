@@ -52,14 +52,12 @@ class OrderPageState extends State<OrderPage> {
             tabs: [
               Tab(
                 child: Text(
-                  'Place Order',
-                  style: TextStyle(color: Colors.black),
+                  'Place Order', style: TextStyle(fontSize: 20, color: Colors.black)
                 ),
               ),
               Tab(
                 child: Text(
-                  'Table Orders',
-                  style: TextStyle(color: Colors.black),
+                  'Table Orders', style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               )
             ],
@@ -102,9 +100,18 @@ class OrderPageState extends State<OrderPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Order:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 125, 164, 129),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.0),
+                  topRight: Radius.circular(15.0),
+                ),
+              ),
+              child: const Center(
+                child: Text('Order:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+              ),
             ),
             Expanded(
               child: ListView.builder(
@@ -114,36 +121,42 @@ class OrderPageState extends State<OrderPage> {
                     onTap: () {
                       itemOptions(context, index);
                     },
-                    child: ListTile(
-                      title: Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: ListTile(
+                        title: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                             Text(' ${orderRequests[index].item}'),
-                            Text(' Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
-                              ]
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
-                                SizedBox(width: 10)
-                              ]
-                            )
-                          ])
-                        ),
+                              Text(' ${orderRequests[index].item}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+                              Text(' Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}', style: const TextStyle(color: Color.fromARGB(255, 97, 96, 96), fontSize: 14.0))
+                                ]
+                              ),
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                                  SizedBox(width: 10)
+                                ]
+                              )
+                            ])
+                          ),
+                        )
                       )
-                    );
-                  },
+                     );
+                    },
+                ),
               ),
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -339,9 +352,18 @@ class OrderPageState extends State<OrderPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'Order Requests:',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 125, 164, 129),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
+              ),
+            ),
+            child: const Center(
+              child: Text('Order Requests:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),)
+            ),
           ),
           Expanded(
             child:StreamBuilder<QuerySnapshot>(
@@ -363,32 +385,38 @@ class OrderPageState extends State<OrderPage> {
                       onTap: () {
                          OrderList.orderOptions(context, orders[index], false);
                       },
-                      child: ListTile(
-                        title: Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: ListTile(
+                          title: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('  Table: ${orders[index].table}'),
-                                Text('  Status: ${orders[index].status}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
-                                ]
-                              ),
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
-                                  SizedBox(width: 10)
-                                ]
-                              )
-                            ])
-                          ),
-                        )
+                                  Text('  Table: ${orders[index].table}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+                                  Text('  Status: ${orders[index].status}', style: const TextStyle(color: Color.fromARGB(255, 97, 96, 96), fontSize: 14.0))
+                                  ]
+                                ),
+                                const Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                                    SizedBox(width: 10)
+                                  ]
+                                )
+                              ])
+                            ),
+                          )
+                      )
                     );
                   },
                 );

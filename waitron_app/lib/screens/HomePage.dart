@@ -40,7 +40,7 @@ class HomePageState extends State<HomePage> {
             children: [
               const SizedBox(height: 80),
               Image.asset('lib/assets/logo.png', width: 300, height: 300),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               Row(
                 children: [
                   Expanded( // Textbox for Table Number entry
@@ -49,8 +49,7 @@ class HomePageState extends State<HomePage> {
                         controller: tableNumEntry,
                         decoration: 
                           const InputDecoration(labelText: 'Table Number', 
-                            labelStyle: TextStyle(
-                              color: Colors.black), 
+                            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black), 
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
                             enabledBorder: UnderlineInputBorder(
@@ -62,7 +61,7 @@ class HomePageState extends State<HomePage> {
                       ),
                     ),  
                   ),
-                  const SizedBox(width: 15.0),
+                  const SizedBox(width: 20.0),
                   ElevatedButton( // Button to go to OrderPage
                     onPressed: () async {
                       bool active = await DBs().isTableActive(Tables(tableNumber: tableNumEntry.text));
@@ -95,7 +94,10 @@ class HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(10.0)
                       ),
                     ),
-                    child: const Text('Place Order', style: TextStyle(color: Colors.black)),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                      child: Text('Place Order', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+                    )
                   ),
                 ]
               ),

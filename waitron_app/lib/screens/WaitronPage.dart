@@ -45,14 +45,12 @@ class WaitronPageState extends State<WaitronPage> {
             tabs: [
               Tab(
                 child: Text(
-                  'Requests',
-                  style: TextStyle(color: Colors.black),
+                  'Requests', style: TextStyle(fontSize: 20, color: Colors.black)
                 ),
               ),
               Tab(
                 child: Text(
-                  'Completed',
-                  style: TextStyle(color: Colors.black),
+                  'Completed', style: TextStyle(fontSize: 20, color: Colors.black)
                 ),
               ),
             ],

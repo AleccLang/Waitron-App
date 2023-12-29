@@ -18,14 +18,12 @@ class KitchenPage extends StatelessWidget {
             tabs: [
               Tab(
                 child: Text(
-                  'Placed',
-                  style: TextStyle(color: Colors.black),
+                  'Placed', style: TextStyle(fontSize: 20, color: Colors.black)
                 ),
               ),
               Tab(
                 child: Text(
-                  'In Progress',
-                  style: TextStyle(color: Colors.black),
+                  'In Progress', style: TextStyle(fontSize: 20, color: Colors.black)
                 ),
               ),
             ],
