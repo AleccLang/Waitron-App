@@ -23,7 +23,7 @@ class HomePageState extends State<HomePage> {
           backgroundColor: const Color.fromARGB(255,85,114,88),
           actions: [
             IconButton( // Route to the staff pages
-              icon: const Icon(Icons.admin_panel_settings_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
+              icon: const Icon(Icons.admin_panel_settings_rounded, size: 50, color: Color.fromARGB(255,255,187,85)),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -49,14 +49,14 @@ class HomePageState extends State<HomePage> {
                         controller: tableNumEntry,
                         decoration: 
                           const InputDecoration(labelText: 'Table Number', 
-                            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black), 
+                            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white), 
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)))
                           ),
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.white),
                         cursorColor: const Color.fromARGB(255, 255, 255, 255)
                       ),
                     ),  
@@ -96,7 +96,7 @@ class HomePageState extends State<HomePage> {
                     ),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 15.0),
-                      child: Text('Place Order', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+                      child: Text('Place Order', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18.0, color: Color.fromARGB(255,85,114,88))),
                     )
                   ),
                 ]

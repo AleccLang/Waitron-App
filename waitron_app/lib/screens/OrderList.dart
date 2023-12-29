@@ -53,7 +53,7 @@ class OrderList extends StatelessWidget {
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                            Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255, 125, 164, 129)),
                             SizedBox(width: 10)
                           ]
                         )
@@ -144,7 +144,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                   IconButton( // Reject order
                     onPressed: () {
@@ -152,7 +152,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.cancel, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.cancel, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -166,7 +166,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.delete, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.delete, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -180,7 +180,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -194,7 +194,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -208,7 +208,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),
@@ -222,7 +222,7 @@ class OrderList extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 ],
               ),

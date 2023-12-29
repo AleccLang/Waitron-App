@@ -145,7 +145,7 @@ class OrderPageState extends State<OrderPage> {
                               const Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                                  Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255, 125, 164, 129)),
                                   SizedBox(width: 10)
                                 ]
                               )
@@ -162,7 +162,7 @@ class OrderPageState extends State<OrderPage> {
               children: [
                 IconButton( // Adds an item to current order
                   alignment: AlignmentDirectional.bottomEnd,
-                  icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
+                  icon: const Icon(Icons.add_circle_rounded, size: 50, color: Color.fromARGB(255,255,187,85)),
                   onPressed: () {
                     addItemToOrder(context);
                   },
@@ -193,7 +193,7 @@ class OrderPageState extends State<OrderPage> {
                       });
                   }
                   },
-                  icon: const Icon(Icons.arrow_circle_right, size: 35, color: Color.fromARGB(255,255,187,85)),
+                  icon: const Icon(Icons.arrow_circle_right, size: 50, color: Color.fromARGB(255,255,187,85)),
                 ),
               ],
             ),
@@ -211,22 +211,28 @@ class OrderPageState extends State<OrderPage> {
           backgroundColor: const Color.fromARGB(255, 125, 164, 129),
           title: const Text('Item Options',  style: TextStyle(color: Colors.black)),
           content: Wrap(
-            alignment: WrapAlignment.spaceEvenly,
+            alignment: WrapAlignment.spaceBetween,
             children: [
-              ElevatedButton( // Update the item
-                onPressed: () {
-                  Navigator.pop(context);
-                  updateItem(context, index);
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(30, 28),
-                  backgroundColor: const Color.fromARGB(255,255,187,85),
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)
+              Column(
+                children: [
+                  const SizedBox(height: 9),
+                  ElevatedButton( // Update the item
+                    onPressed: () {
+                      Navigator.pop(context);
+                      updateItem(context, index);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(25, 35),
+                      backgroundColor: const Color.fromARGB(255,255,187,85),
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)
+                      ),
+                    ),
+                    child: const Text('Update', style: TextStyle(color: Colors.black)),
                   ),
-                ),
-                child: const Text('Update', style: TextStyle(color: Colors.black)),
+                ]
               ),
+              
               IconButton( // Remove the item
                 onPressed: () {
                   setState(() {
@@ -235,14 +241,14 @@ class OrderPageState extends State<OrderPage> {
                   Navigator.pop(context);
                 },
                 alignment: AlignmentDirectional.bottomEnd,
-                icon: const Icon(Icons.delete, size: 35, color: Color.fromARGB(255,255,187,85)),
+                icon: const Icon(Icons.delete, size: 50, color: Color.fromARGB(255,255,187,85)),
               ),
               IconButton( // Cancel
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 alignment: AlignmentDirectional.bottomEnd,
-                icon: const Icon(Icons.cancel, size: 35, color: Color.fromARGB(255,255,187,85)),
+                icon: const Icon(Icons.cancel, size: 50, color: Color.fromARGB(255,255,187,85)),
               ),
             ],
           ),
@@ -250,7 +256,6 @@ class OrderPageState extends State<OrderPage> {
       },
     );
   }
-
 
   // Updates the selected item
   void updateItem(BuildContext context, int index) {
@@ -336,7 +341,7 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               alignment: AlignmentDirectional.bottomEnd,
-              icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+              icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
             ),
           ],
         ),
@@ -409,7 +414,7 @@ class OrderPageState extends State<OrderPage> {
                                 const Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                                    Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255, 125, 164, 129)),
                                     SizedBox(width: 10)
                                   ]
                                 )
@@ -516,7 +521,7 @@ class OrderPageState extends State<OrderPage> {
                 });
               },
               alignment: Alignment.bottomRight,
-              icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
+              icon: const Icon(Icons.add_circle_rounded, size: 50, color: Color.fromARGB(255,255,187,85)),
             ),
           ],
         ),

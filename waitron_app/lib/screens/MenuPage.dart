@@ -35,7 +35,7 @@ class MenuPageState extends State<MenuPage> {
                 ),
               ),
               child: const Center(
-                child: Text('Menu:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),),
+                child: Text('Menu:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),),
               ),
             ),
             Expanded( // Items on the menu
@@ -94,7 +94,7 @@ class MenuPageState extends State<MenuPage> {
             ),
             IconButton( // Adds item to menu
               alignment: AlignmentDirectional.bottomEnd,
-              icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
+              icon: const Icon(Icons.add_circle_rounded, size: 50, color: Color.fromARGB(255,255,187,85)),
               onPressed: () {
                 addItemOptions(context);
               },
@@ -166,7 +166,7 @@ class MenuPageState extends State<MenuPage> {
                 }
               },
               alignment: AlignmentDirectional.bottomEnd,
-              icon: const Icon(Icons.add_circle_rounded, size: 35, color: Color.fromARGB(255,255,187,85)),
+              icon: const Icon(Icons.add_circle_rounded, size: 50, color: Color.fromARGB(255,255,187,85)),
             ),
           ],
         ),
@@ -220,7 +220,7 @@ class MenuPageState extends State<MenuPage> {
                     }
                     },
                     alignment: AlignmentDirectional.bottomEnd,
-                    icon: const Icon(Icons.check_circle, size: 35, color: Color.fromARGB(255,255,187,85)),
+                    icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255,255,187,85)),
                   ),
                 IconButton( // Delete an item from the menu
                   onPressed: () {
@@ -234,14 +234,14 @@ class MenuPageState extends State<MenuPage> {
                     Navigator.pop(context);
                   },
                   alignment: AlignmentDirectional.bottomEnd,
-                  icon: const Icon(Icons.delete, size: 35, color: Color.fromARGB(255,255,187,85)),
+                  icon: const Icon(Icons.delete, size: 50, color: Color.fromARGB(255,255,187,85)),
                 ),
                 IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   alignment: AlignmentDirectional.bottomEnd,
-                  icon: const Icon(Icons.cancel, size: 35, color: Color.fromARGB(255,255,187,85)),
+                  icon: const Icon(Icons.cancel, size: 50, color: Color.fromARGB(255,255,187,85)),
                 ),
               ],
             ),
