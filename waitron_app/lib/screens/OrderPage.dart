@@ -120,11 +120,23 @@ class OrderPageState extends State<OrderPage> {
                           color: const Color.fromARGB(255, 255, 255, 255),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('${String.fromCharCode(0x2022)} ${orderRequests[index].item}'),
-                            Text('   Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                             Text(' ${orderRequests[index].item}'),
+                            Text(' Notes: ${orderRequests[index].notes}, Quantity: ${orderRequests[index].quantity}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                              ]
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                                SizedBox(width: 10)
+                              ]
+                            )
                           ])
                         ),
                       )
@@ -351,20 +363,32 @@ class OrderPageState extends State<OrderPage> {
                       onTap: () {
                          OrderList.orderOptions(context, orders[index], false);
                       },
-                      child:  ListTile(
-                      title: Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('${String.fromCharCode(0x2022)} Table: ${orders[index].table}'),
-                            Text('   Status: ${orders[index].status}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
-                          ])
-                        ),
-                      )
+                      child: ListTile(
+                        title: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('  Table: ${orders[index].table}'),
+                                Text('  Status: ${orders[index].status}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
+                                ]
+                              ),
+                              const Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Icon(Icons.add_circle_rounded, color: Color.fromARGB(255, 125, 164, 129)),
+                                  SizedBox(width: 10)
+                                ]
+                              )
+                            ])
+                          ),
+                        )
                     );
                   },
                 );

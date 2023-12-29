@@ -56,6 +56,7 @@ class DBs {
 
   // Creates an item
   void addItem(Item item) async {
+    item.code = itemCollection.doc().id;
     await itemCollection.doc(item.code).set(item.toJson());
   }
 

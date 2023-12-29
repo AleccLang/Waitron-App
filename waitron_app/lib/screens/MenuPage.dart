@@ -12,7 +12,6 @@ class MenuPage extends StatefulWidget {
 }
 
 class MenuPageState extends State<MenuPage> {
-  final TextEditingController itemCodeEntry = TextEditingController();
   final TextEditingController itemDescriptionEntry = TextEditingController();
   final TextEditingController itemPriceEntry = TextEditingController();
 
@@ -51,17 +50,25 @@ class MenuPageState extends State<MenuPage> {
                         // Display each item in the list
                         child: ListTile(
                           title: Container(
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('${String.fromCharCode(0x2022)} ${items[index].description} - R${items[index].price}', style: const TextStyle(color: Colors.black)),
-                                Text('   Item code - ${items[index].code}', style: const TextStyle(color: Colors.black, fontSize: 13.0))
-                              ])
+                                Text(
+                                  '${items[index].description}',
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                                Text(
+                                  'R${items[index].price}',
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                              ],
                             ),
+                          ),
                           )
                         );
                       },
@@ -96,18 +103,6 @@ class MenuPageState extends State<MenuPage> {
           content: Column( mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
-              controller: itemCodeEntry,
-              decoration: const InputDecoration(labelText: 'Item Code',
-                labelStyle: TextStyle(
-                  color: Colors.black), 
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black)),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black)),
-              ),
-              cursorColor: const Color.fromARGB(255,255,187,85)
-            ),
-            TextField(
               controller: itemDescriptionEntry,
               decoration: const InputDecoration(labelText: 'Item Description',
                 labelStyle: TextStyle(
@@ -135,7 +130,7 @@ class MenuPageState extends State<MenuPage> {
             const SizedBox(height: 16.0),
             IconButton( // Add an item to the menu
               onPressed: () {
-                if (itemCodeEntry.text.isEmpty || itemDescriptionEntry.text.isEmpty || itemPriceEntry.text.isEmpty){
+                if (itemDescriptionEntry.text.isEmpty || itemPriceEntry.text.isEmpty){
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Please complete all fields')
@@ -145,7 +140,7 @@ class MenuPageState extends State<MenuPage> {
                 else {
                   DBs().addItem(
                     Item(
-                      code: itemCodeEntry.text,
+                      code: "",
                       description: itemDescriptionEntry.text,
                       price: int.tryParse(itemPriceEntry.text) ?? 0,
                     ),
@@ -153,7 +148,6 @@ class MenuPageState extends State<MenuPage> {
                   setState(() {
                     Navigator.pop(context);
                   });
-                  itemCodeEntry.clear();
                   itemDescriptionEntry.clear();
                   itemPriceEntry.clear();
                 }
@@ -219,7 +213,7 @@ class MenuPageState extends State<MenuPage> {
                   onPressed: () {
                     DBs().deleteItem(
                       Item(
-                        code: item.code,
+                        code: "",
                         description: item.description,
                         price: 0,
                       ),
