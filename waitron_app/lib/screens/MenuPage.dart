@@ -19,7 +19,6 @@ class MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255,85,114,88),
-      appBar: AppBar(toolbarHeight: 30.0, backgroundColor: const Color.fromARGB(255,85,114,88)),
       body: Padding(
         padding:  const EdgeInsets.all(15.0),
         child: Column(

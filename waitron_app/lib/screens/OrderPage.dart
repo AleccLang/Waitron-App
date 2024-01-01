@@ -232,7 +232,6 @@ class OrderPageState extends State<OrderPage> {
                   ),
                 ]
               ),
-              
               IconButton( // Remove the item
                 onPressed: () {
                   setState(() {
@@ -293,7 +292,13 @@ class OrderPageState extends State<OrderPage> {
                           value: item,
                           child: Text('${item.description} - R${item.price}'),
                         )).toList(),
-                    decoration: const InputDecoration(labelText: 'Select Item'),
+                    decoration: const InputDecoration(labelText: 'Select Item',
+                      labelStyle: TextStyle(
+                        color: Colors.black), 
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))),
                   );
                 } 
                 else {

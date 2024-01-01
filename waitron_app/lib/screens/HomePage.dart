@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
   
 class HomePageState extends State<HomePage> {
   final TextEditingController tableNumEntry = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,7 @@ class HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 80),
+              const SizedBox(height: 100),
               Image.asset('lib/assets/logo.png', width: 300, height: 300),
               const SizedBox(height: 30),
               Row(
@@ -49,15 +49,15 @@ class HomePageState extends State<HomePage> {
                         controller: tableNumEntry,
                         decoration: 
                           const InputDecoration(labelText: 'Table Number', 
-                            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white), 
+                            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black), 
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
+                              borderSide: BorderSide(color: Colors.black)),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)))
+                              borderSide: BorderSide(color: Colors.black))
                           ),
                         keyboardType: TextInputType.number,
-                        style: const TextStyle(color: Colors.white),
-                        cursorColor: const Color.fromARGB(255, 255, 255, 255)
+                        style: const TextStyle(color: Colors.black),
+                        cursorColor: const Color.fromARGB(255, 0, 0, 0)
                       ),
                     ),  
                   ),
@@ -79,7 +79,7 @@ class HomePageState extends State<HomePage> {
                           ),
                         );
                       }
-                      if (!active && !tableNumEntry.text.isEmpty){
+                      if (!active && tableNumEntry.text.isNotEmpty){
                         DBs().addActiveTable(Tables(tableNumber: tableNumEntry.text));
                         Navigator.push( // Navigate to order page
                           context,

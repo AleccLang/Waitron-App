@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waitron_app/screens/KitchenPage.dart';
 import 'package:waitron_app/screens/MenuPage.dart';
 import 'package:waitron_app/screens/WaitronPage.dart';
+import 'package:waitron_app/services/db.dart';
 
 // Controls navigation between the Waitron, Kitchen and Menu pages
 class Staff extends StatefulWidget {
@@ -24,6 +25,46 @@ class StaffPageState extends State<Staff> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      toolbarHeight: 40.0,
+      actions: [
+      IconButton(
+        icon: const Icon(Icons.settings), // Change the icon as needed
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: const Color.fromARGB(255, 125, 164, 129),
+                title: const Text('Delete Closed Orders?', style: TextStyle(color: Colors.black)),
+                content: Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  children: [
+                    IconButton( // Removes orders with "Collected" and "Delivered" status
+                      onPressed: () {
+                        DBs().deleteFinishedOrders();
+                        Navigator.pop(context);
+                      },
+                      alignment: AlignmentDirectional.bottomEnd,
+                      icon: const Icon(Icons.delete, size: 50, color: Color.fromARGB(255, 255, 187, 85)),
+                    ),
+                    IconButton( // Cancel
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      alignment: AlignmentDirectional.bottomEnd,
+                      icon: const Icon(Icons.cancel, size: 50, color: Color.fromARGB(255, 255, 187, 85)),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      )
+    ],
+    ),
     body: PageView(
       controller: pageController,
       onPageChanged: (newIndex){
