@@ -216,15 +216,7 @@ class PlaceOrderTabState extends State<PlaceOrderTab> {
                       ),
                     );
                   }
-                  bool active = await DBs().isTableActive(Tables(tableNumber: tableNumEntry.text));
-                  if (active){ // Error msg to notify the table is already in use
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Table ${tableNumEntry.text} is already in use.')
-                      ),
-                    );
-                  }
-                  if (!active && tableNumEntry.text.isNotEmpty && orderRequests.isNotEmpty){
+                  if (tableNumEntry.text.isNotEmpty && orderRequests.isNotEmpty){
                     DBs().addOrder(
                       Orders(
                         id: "",
