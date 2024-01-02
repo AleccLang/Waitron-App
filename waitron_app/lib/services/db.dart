@@ -42,17 +42,6 @@ class DBs {
     orderCollection.doc(order.id).delete();
   }
 
-  // Delete all orders with a status "Delivered" and "Collected"
-  void deleteFinishedOrders() async {
-    QuerySnapshot querySnapshot = await orderCollection
-        .where('status', whereIn: ['Delivered', 'Collected'])
-        .get();
-
-    for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
-      await orderCollection.doc(docSnapshot.id).delete();
-    }
-  }
-
   // Real-time listener for changes in the orders collection, called whenever there is an update to orders
   void listenToOrders(void Function(List<Orders>) ords) {
     orderCollection.snapshots().listen((QuerySnapshot<Object?> snapshot) {

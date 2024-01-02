@@ -5,7 +5,7 @@ import 'package:waitron_app/screens/OrderList.dart';
 import 'package:waitron_app/services/NotificationService.dart';
 import 'package:waitron_app/services/db.dart';
 
-// Page enables waitron to manage orders
+// Page enables waitron to manage and place orders
 class WaitronPage extends StatefulWidget  {
   const WaitronPage({super.key});
   
@@ -250,7 +250,7 @@ class PlaceOrderTabState extends State<PlaceOrderTab> {
     );
   }
 
-  // Remove or update item in current order request
+  // Remove or update item in the order
   void itemOptions(BuildContext context, int index) {
     showDialog(
       context: context,
@@ -403,7 +403,7 @@ class PlaceOrderTabState extends State<PlaceOrderTab> {
   );
   }
 
-  // Adds an item to the order request
+  // Adds an item to the order
   void addItemToOrder(BuildContext context) {
     showDialog(
       context: context,

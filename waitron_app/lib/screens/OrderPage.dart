@@ -35,14 +35,14 @@ class OrderPageState extends State<OrderPage> {
   void initState() {
     super.initState();
     DBs().listenToOrders((List<Orders> orders) {
-      checkForNewPlacedOrder(orders);
+      checkForOrderStatus(orders);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255,85,114,88),
         appBar: AppBar(
@@ -52,12 +52,17 @@ class OrderPageState extends State<OrderPage> {
             tabs: [
               Tab(
                 child: Text(
-                  'Place Order', style: TextStyle(fontSize: 20, color: Colors.black)
+                  'Place Order', style: TextStyle(fontSize: 17, color: Colors.black)
                 ),
               ),
               Tab(
                 child: Text(
-                  'Table Orders', style: TextStyle(fontSize: 20, color: Colors.black),
+                  'Requests', style: TextStyle(fontSize: 17, color: Colors.black),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Pick Up', style: TextStyle(fontSize: 17, color: Colors.black),
                 ),
               )
             ],
@@ -70,7 +75,8 @@ class OrderPageState extends State<OrderPage> {
         body: TabBarView(
           children: [
             createOrderTab(context), // Widget for creating an order request
-            listOrdersTab(context), // Widget for listing all orders for the table
+            listOrdersTab(context, "Requested", "Order Requests:"), // Widget for listing order requests for the table
+            listOrdersTab(context, "Completed", "Ready Orders:"), // Widget for listing order requests for the table
           ],
         ),
       ),
@@ -78,7 +84,7 @@ class OrderPageState extends State<OrderPage> {
   }
 
   // Checks status of orders in the list to send out notifications
-  void checkForNewPlacedOrder(List<Orders> orders) {
+  void checkForOrderStatus(List<Orders> orders) {
     for (Orders order in orders) {
       if (order.status == 'Placed' && order.table == tableNumber && order.notificationStatus != "ApprovedNotification") {
         NotificationService().showNotification("Order Approved", "Order for table ${order.table} has been approved.");
@@ -87,6 +93,11 @@ class OrderPageState extends State<OrderPage> {
       }
       if (order.status == 'Rejected' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
         NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
+        DBs().deleteOrder(order);
+        break;
+      }
+      if (order.status == 'Completed' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
+        NotificationService().showNotification("Order Ready", "Order for table ${order.table} is available for pickup.");
         DBs().deleteOrder(order);
         break;
       }
@@ -356,7 +367,7 @@ class OrderPageState extends State<OrderPage> {
   }
 
   // Tab to list all orders for the table
-  Widget listOrdersTab(BuildContext context) {
+  Widget listOrdersTab(BuildContext context, String status, String heading) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -371,8 +382,8 @@ class OrderPageState extends State<OrderPage> {
                 topRight: Radius.circular(15.0),
               ),
             ),
-            child: const Center(
-              child: Text('Order Requests:', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),)
+            child: Center(
+              child: Text(heading, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),)
             ),
           ),
           Expanded(
@@ -383,7 +394,7 @@ class OrderPageState extends State<OrderPage> {
                   return const CircularProgressIndicator();
                 }
                 List<Orders> orders = snapshot.data!.docs
-                .where((doc) => doc['table'] == tableNumber)
+                .where((doc) => doc['table'] == tableNumber && doc['status'] == status) 
                 .map((DocumentSnapshot doc) {
                   return Orders.fromJson(doc.data() as Map<String, dynamic>);
                 }).toList();
