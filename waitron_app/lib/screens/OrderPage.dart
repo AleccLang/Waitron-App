@@ -91,14 +91,14 @@ class OrderPageState extends State<OrderPage> {
         DBs().updateNotificationStatus(order.id, "ApprovedNotification");
         break;
       }
-      if (order.status == 'Rejected' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
+      if (order.status == 'Rejected' && order.table == tableNumber) {
         NotificationService().showNotification("Order Rejected", "Order for table ${order.table} has been rejected.");
         DBs().deleteOrder(order);
         break;
       }
-      if (order.status == 'Completed' && order.table == tableNumber && order.notificationStatus != "RejectedNotification") {
+      if (order.status == 'Completed' && order.table == tableNumber && order.notificationStatus != "CompletedNotification") {
         NotificationService().showNotification("Order Ready", "Order for table ${order.table} is available for pickup.");
-        DBs().deleteOrder(order);
+        DBs().updateNotificationStatus(order.id, "CompletedNotification");
         break;
       }
     }
