@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:waitron_app/models/Models.dart';
+import 'package:waitron_app/screens/AuthenticatePage.dart';
 import 'package:waitron_app/screens/Staff.dart';
+import 'package:waitron_app/services/AuthenticateService.dart';
 import 'package:waitron_app/services/db.dart';
 import 'OrderPage.dart';
 
@@ -22,16 +24,24 @@ class HomePageState extends State<HomePage> {
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255,85,114,88),
           actions: [
-            IconButton( // Route to the staff pages
+            IconButton( 
               icon: const Icon(Icons.admin_panel_settings_rounded, size: 50, color: Color.fromARGB(255,255,187,85)),
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async{
+                if (AuthenticateService().fbAuth.currentUser == null) { // Route to login
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AuthenticatePage()),
+                  );
+                }
+                else { // Route to the staff pages
+                  Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Staff()),
-                );
-              },
-            ),
-          ],
+                  );
+                }
+              }
+            )
+          ]
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(15.0),

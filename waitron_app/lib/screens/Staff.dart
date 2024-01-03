@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:waitron_app/screens/HomePage.dart';
 import 'package:waitron_app/screens/KitchenPage.dart';
 import 'package:waitron_app/screens/MenuPage.dart';
 import 'package:waitron_app/screens/WaitronPage.dart';
+import 'package:waitron_app/services/AuthenticateService.dart';
 
 // Controls navigation between the Waitron, Kitchen and Menu pages
 class Staff extends StatefulWidget {
@@ -27,6 +29,45 @@ class StaffPageState extends State<Staff> {
     appBar: AppBar(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       toolbarHeight: 40.0,
+       actions: [
+      IconButton(
+        icon: const Icon(Icons.logout_rounded),
+        onPressed: () {
+          showDialog( 
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: const Color.fromARGB(255, 125, 164, 129),
+                title: const Text('Sign Out?', style: TextStyle(color: Colors.black)),
+                content: Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  children: [
+                    IconButton( // Signs the user out
+                      onPressed: () {
+                        AuthenticateService().signOut();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomePage()),
+                        );
+                      },
+                      alignment: AlignmentDirectional.bottomEnd,
+                      icon: const Icon(Icons.check_circle, size: 50, color: Color.fromARGB(255, 255, 187, 85)),
+                    ),
+                    IconButton( // Cancel
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      alignment: AlignmentDirectional.bottomEnd,
+                      icon: const Icon(Icons.cancel, size: 50, color: Color.fromARGB(255, 255, 187, 85)),
+                    )
+                  ]
+                )
+              );
+            }
+          );
+        }
+      )
+    ]
     ),
     body: PageView(
       controller: pageController,
